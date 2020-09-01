@@ -33,6 +33,13 @@ public class RentalExpress {
   JPanel acctGrid4 = new JPanel();
   JPanel acctGrid5 = new JPanel();
   JPanel acctGrid6 = new JPanel();
+  JPanel acctGrid7 = new JPanel();
+  JPanel acctGrid8 = new JPanel();
+  JPanel acctGrid9 = new JPanel();
+  JPanel acctGrid10 = new JPanel();
+  JPanel acctGrid11 = new JPanel();
+  JPanel acctGrid12 = new JPanel();
+  JPanel acctGrid13 = new JPanel();
   
   JButton accBtn = new JButton("<html><center>"+"Create Account / Log In"+"</html></center>");
   JButton pickupBtn = new JButton("<html><center>"+"Pick-Up Location and Date"+"</html></center>");
@@ -46,8 +53,10 @@ public class RentalExpress {
   JLabel userLabel = new JLabel("Username: ", SwingConstants.CENTER);
   JLabel passLabel = new JLabel("Password: ", SwingConstants.CENTER);
   JLabel creditLabel = new JLabel("Credit Card # (No Spaces): ", SwingConstants.CENTER);
+  JLabel bdayLabel = new JLabel("Birthday: ", SwingConstants.CENTER);
   
-  Integer[] bMJCB = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+  String[] bMJCB = {"January", "February", "March", "April", "May", "June", "July", "August", 
+      "September", "October", "November", "December"};
   JComboBox birthMonthJCB = new JComboBox(bMJCB);
   Integer[] bDJCB = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
       21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
@@ -70,7 +79,6 @@ public class RentalExpress {
   JTextField emailText = new JTextField(" Email Address ");
   JTextField userText = new JTextField(" Username ");
   JTextField passText = new JTextField(" Password ");
-  
   
   JTextArea t1 = new JTextArea(10, 10);
   JTextArea t2 = new JTextArea(10, 10);
@@ -110,7 +118,7 @@ public class RentalExpress {
     userText.setHorizontalAlignment(JTextField.CENTER);
     passText.setHorizontalAlignment(JTextField.CENTER);
     
-    acctPanel.setLayout(new GridLayout(14, 1));
+    acctPanel.setLayout(new GridLayout(18, 1));
     acctPanel.add(acctGrid1);
     acctGrid1.setLayout(new GridLayout(1, 4));
     acctPanel.add(acctGrid2);
@@ -119,14 +127,45 @@ public class RentalExpress {
     acctGrid3.setLayout(new GridLayout(1, 4));
     acctPanel.add(acctGrid4);
     acctGrid4.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid5);
+    acctGrid5.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid6);
+    acctGrid6.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid7);
+    acctGrid7.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid8);
+    acctGrid8.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid9);
+    acctGrid9.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid10);
+    acctGrid10.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid11);
+    acctGrid11.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid12);
+    acctGrid12.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid13);
+    acctGrid13.setLayout(new GridLayout(1, 4));
+    
     acctGrid1.add(fNameLabel);
     acctGrid1.add(fNameText);
     acctGrid1.add(lNameLabel);
     acctGrid1.add(lNameText);
-    acctGrid2.add(addressLabel);
+    acctGrid3.add(addressLabel);
     addressLabel.setHorizontalAlignment(JLabel.LEFT);
-    acctGrid3.add(addrText1);
-    acctGrid4.add(addrText2);
+    acctGrid4.add(addrText1);
+    acctGrid5.add(addrText2);
+    acctGrid7.add(emailLabel);
+    acctGrid7.add(emailText);
+    acctGrid8.add(userLabel);
+    acctGrid8.add(userText);
+    acctGrid9.add(passLabel);
+    acctGrid9.add(passText);
+    acctGrid11.add(bdayLabel);
+    acctGrid11.add(birthMonthJCB);
+    acctGrid11.add(birthDayJCB);
+    acctGrid11.add(birthYearJCB);
+    
+    
     
     
     
@@ -155,6 +194,27 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         addrText2.setText("");
+      }
+    });
+    
+    emailText.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        emailText.setText("");
+      }
+    });
+    
+    userText.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        userText.setText("");
+      }
+    });
+    
+    passText.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        passText.setText("");
       }
     });
     
