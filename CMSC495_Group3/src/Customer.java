@@ -10,8 +10,12 @@ public class Customer {
   private String email;
   private String username;
   private String password;
-  private int creditCard;
   private String cardExp;
+  private String birthMonth;
+  
+  private int birthDay;
+  private int birthYear;
+  private int creditCard;
   
   public Customer() {
     
@@ -122,7 +126,10 @@ public class Customer {
     return numCustomers;
   }
   
-  
+  // Do we need this?
+  public String displayInfo() {
+    return "";
+  }
   
   
   
