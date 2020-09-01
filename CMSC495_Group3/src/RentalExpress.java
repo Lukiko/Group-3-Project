@@ -23,7 +23,6 @@ public class RentalExpress {
   JPanel carPanel = new JPanel();
   JPanel finalPanel = new JPanel();
   
-  //JButton accBtn = new JButton("Create Account / Log In");
   JButton accBtn = new JButton("<html><center>"+"Create Account / Log In"+"</html></center>");
   JButton pickupBtn = new JButton("<html><center>"+"Pick-Up Location and Date"+"</html></center>");
   JButton carBtn = new JButton("Select Car");
