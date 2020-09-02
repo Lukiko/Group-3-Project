@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class RentalExpress {
+  
+  private String fName, lName, addr1, addr2, email, user, pass, month, day, year;
 
   JFrame frame = new JFrame("Rental Express");
   
@@ -40,11 +42,17 @@ public class RentalExpress {
   JPanel acctGrid11 = new JPanel();
   JPanel acctGrid12 = new JPanel();
   JPanel acctGrid13 = new JPanel();
+  JPanel acctGrid14 = new JPanel();
+  JPanel acctGrid15 = new JPanel();
+  JPanel acctGrid16 = new JPanel();
+  JPanel acctGrid17 = new JPanel();
   
   JButton accBtn = new JButton("<html><center>"+"Create Account / Log In"+"</html></center>");
   JButton pickupBtn = new JButton("<html><center>"+"Pick-Up Location and Date"+"</html></center>");
   JButton carBtn = new JButton("Select Car");
   JButton finalBtn = new JButton("Checkout");
+  
+  JButton regBtn = new JButton("Register Account");
   
   JLabel fNameLabel = new JLabel("First Name: ", SwingConstants.CENTER);
   JLabel lNameLabel = new JLabel("Last Name: ", SwingConstants.CENTER);
@@ -71,6 +79,8 @@ public class RentalExpress {
       1915, 1914, 1913, 1912, 1911, 1910, 1909, 1908, 1907, 1906, 1905, 1904, 1903, 1902, 1901,
       1900};
   JComboBox birthYearJCB = new JComboBox(bYJCB);
+  
+  
   
   JTextField fNameText = new JTextField(" First Name ");
   JTextField lNameText = new JTextField(" Last Name ");
@@ -145,6 +155,14 @@ public class RentalExpress {
     acctGrid12.setLayout(new GridLayout(1, 4));
     acctPanel.add(acctGrid13);
     acctGrid13.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid14);
+    acctGrid14.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid15);
+    acctGrid15.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid16);
+    acctGrid16.setLayout(new GridLayout(1, 4));
+    acctPanel.add(acctGrid17);
+    acctGrid17.setLayout(new GridLayout(1, 2));
     
     acctGrid1.add(fNameLabel);
     acctGrid1.add(fNameText);
@@ -164,9 +182,7 @@ public class RentalExpress {
     acctGrid11.add(birthMonthJCB);
     acctGrid11.add(birthDayJCB);
     acctGrid11.add(birthYearJCB);
-    
-    
-    
+    acctGrid17.add(regBtn); 
     
     
     fNameText.addMouseListener(new MouseAdapter() {
@@ -249,6 +265,16 @@ public class RentalExpress {
     finalBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         card.show(cardPanel,  "p4");
+      }
+    });
+    
+    regBtn.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent arg0) {
+        
+        
+        
+        Customer c = new Customer()
+        
       }
     });
     
