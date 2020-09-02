@@ -11,8 +11,10 @@ public class Customer {
   private String username;
   private String password;
   private String cardExp;
-  private String birthMonth;
+  private String month;
   
+  private int day;
+  private int year;
   private int birthDay;
   private int birthYear;
   private int creditCard;
@@ -22,7 +24,7 @@ public class Customer {
   }
   
   public Customer(String firstName, String lastName, String address1, String address2, String email,
-      String username, String password) {
+      String username, String password, String month, int day, int year) {
     
     this.firstName = firstName;
     this.lastName = lastName;
@@ -31,6 +33,9 @@ public class Customer {
     this.email = email;
     this.username = username;
     this.password = password;
+    this.month = month;
+    this.day = day;
+    this.year = year;
     numCustomers += 1;
     
   }
@@ -129,6 +134,30 @@ public class Customer {
   // Do we need this?
   public String displayInfo() {
     return "";
+  }
+
+  public String getMonth() {
+    return month;
+  }
+
+  public void setMonth(String month) {
+    this.month = month;
+  }
+
+  public int getDay() {
+    return day;
+  }
+
+  public void setDay(int day) {
+    this.day = day;
+  }
+
+  public int getYear() {
+    return year;
+  }
+
+  public void setYear(int year) {
+    this.year = year;
   }
   
   

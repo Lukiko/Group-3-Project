@@ -17,7 +17,8 @@ import javax.swing.SwingConstants;
 
 public class RentalExpress {
   
-  private String fName, lName, addr1, addr2, email, user, pass, month, day, year;
+  private String fName, lName, addr1, addr2, email, user, pass, month;
+  private int day, year;
 
   JFrame frame = new JFrame("Rental Express");
   
@@ -271,9 +272,19 @@ public class RentalExpress {
     regBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         
+        fName = fNameText.getText();
+        lName = lNameText.getText();
+        addr1 = addrText1.getText();
+        addr2 = addrText2.getText();
+        email = emailText.getText();
+        user = userText.getText();
+        pass = passText.getText();
+        month = (String) birthMonthJCB.getSelectedItem();
+        day = (Integer) birthDayJCB.getSelectedItem();
+        year = (Integer) birthYearJCB.getSelectedItem();
         
         
-        Customer c = new Customer()
+        Customer c = new Customer(fName, lName, addr1, addr2, email, user, pass, month, day, year);
         
       }
     });
