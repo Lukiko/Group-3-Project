@@ -286,6 +286,10 @@ public class RentalExpress {
         
         Customer c = new Customer(fName, lName, addr1, addr2, email, user, pass, month, day, year);
         
+        card.show(cardPanel, "p2");
+        
+        c.display();
+        
       }
     });
     

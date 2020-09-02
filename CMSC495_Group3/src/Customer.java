@@ -160,6 +160,14 @@ public class Customer {
     this.year = year;
   }
   
+  public void display() {
+    System.out.println(firstName + " " + lastName);
+    System.out.println(address1); 
+    System.out.println(address2);
+    System.out.println(email); 
+    System.out.println(username);
+    System.out.println("Birthday: " + month + " " + day + ", " + year); 
+  }
   
   
 }
