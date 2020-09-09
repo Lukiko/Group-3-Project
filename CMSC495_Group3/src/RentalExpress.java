@@ -48,6 +48,7 @@ public class RentalExpress {
   JPanel acctGrid16 = new JPanel();
   JPanel acctGrid17 = new JPanel();
   
+  // Account panel items
   JButton accBtn = new JButton("<html><center>"+"Create Account / Log In"+"</html></center>");
   JButton pickupBtn = new JButton("<html><center>"+"Pick-Up Location and Date"+"</html></center>");
   JButton carBtn = new JButton("Select Car");
@@ -81,8 +82,6 @@ public class RentalExpress {
       1900};
   JComboBox birthYearJCB = new JComboBox(bYJCB);
   
-  
-  
   JTextField fNameText = new JTextField(" First Name ");
   JTextField lNameText = new JTextField(" Last Name ");
   JTextField addrText1 = new JTextField(" House/Apt # & Street ");
@@ -91,10 +90,38 @@ public class RentalExpress {
   JTextField userText = new JTextField(" Username ");
   JTextField passText = new JTextField(" Password ");
   
-  JTextArea t1 = new JTextArea(10, 10);
-  JTextArea t2 = new JTextArea(10, 10);
-  JTextArea t3 = new JTextArea(10, 10);
-  JTextArea t4 = new JTextArea(10, 10);
+  // location & car panel items
+  JLabel pickUpLocLabel = new JLabel("Pick-Up Location: ", SwingConstants.CENTER);
+  JLabel dropOffLocLabel = new JLabel("Drop-Off Location: ", SwingConstants.CENTER);
+  JLabel dropOffDayLabel = new JLabel("Drop-Off Date: ");
+  JLabel pickUpDayLabel = new JLabel("Pick-Up Date: ");
+  
+  String[] puJCB = {"Alexandria, VA", "Centreville, VA", "Chantilly, VA", "Culpeper, VA", "Falls Church, VA", "Fairfax, VA"};
+  String[] doJCB = {"Alexandria, VA", "Centreville, VA", "Chantilly, VA", "Culpeper, VA", "Falls Church, VA", "Fairfax, VA"};
+  JComboBox pickUpJCB = new JComboBox(puJCB);
+  JComboBox dropOffJCB = new JComboBox(doJCB);
+  
+  Integer[] doDJCB = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+  String[] doMJCB = {"January", "February", "March", "April", "May", "June", "July", "August", 
+      "September", "October", "November", "December"};
+  Integer[] doYJCB = {2020, 2021};
+  JComboBox doDayJCB = new JComboBox(doDJCB);
+  JComboBox doMonthJCB = new JComboBox(doMJCB);
+  JComboBox doYearJCB = new JComboBox(doYJCB);
+  
+  Integer[] puDJCB = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+  String[] puMJCB = {"January", "February", "March", "April", "May", "June", "July", "August", 
+      "September", "October", "November", "December"};
+  Integer[] puYJCB = {2020, 2021};
+  JComboBox puYearJCB = new JComboBox(puYJCB);
+  JComboBox puDayJCB = new JComboBox(puDJCB);
+  JComboBox puMonthJCB = new JComboBox(puMJCB);
+  
+  
+  
+  
   
   JSplitPane sp = new JSplitPane(SwingConstants.VERTICAL, buttonPanel, cardPanel);
   
@@ -121,6 +148,7 @@ public class RentalExpress {
     cardPanel.add(carPanel, "p3");
     cardPanel.add(finalPanel, "p4");
     
+    // Account panel
     fNameText.setHorizontalAlignment(JTextField.CENTER);
     lNameText.setHorizontalAlignment(JTextField.CENTER);
     addrText1.setHorizontalAlignment(JTextField.CENTER);
@@ -183,8 +211,52 @@ public class RentalExpress {
     acctGrid11.add(birthMonthJCB);
     acctGrid11.add(birthDayJCB);
     acctGrid11.add(birthYearJCB);
-    acctGrid17.add(regBtn); 
+    acctGrid17.add(regBtn);
     
+    // Pick-Up Drop-Off Panel
+    pickupPanel.setLayout(null);
+    
+    //---------------------------- Pick Up
+    
+    pickUpDayLabel.setBounds(70, 50, 80, 50);
+    pickupPanel.add(pickUpDayLabel);
+       
+    puMonthJCB.setBounds(160, 60, 85, 35);
+    pickupPanel.add(puMonthJCB);
+    
+    puDayJCB.setBounds(250, 60, 50, 35);
+    pickupPanel.add(puDayJCB);
+      
+    puYearJCB.setBounds(305, 60, 60, 35);
+    pickupPanel.add(puYearJCB);
+    
+    pickUpLocLabel.setBounds(42, 105, 110, 50);
+    pickupPanel.add(pickUpLocLabel);
+    
+    pickUpJCB.setBounds(160, 115, 165, 35);
+    pickupPanel.add(pickUpJCB);
+    
+    //---------------------------- Drop Off
+    
+    dropOffDayLabel.setBounds(66, 205, 85, 50);
+    pickupPanel.add(dropOffDayLabel);
+    
+    doMonthJCB.setBounds(160, 215, 85, 35);
+    pickupPanel.add(doMonthJCB);
+    
+    doDayJCB.setBounds(250, 215, 50, 35);
+    pickupPanel.add(doDayJCB);
+    
+    doYearJCB.setBounds(305, 215, 60, 35);
+    pickupPanel.add(doYearJCB);
+    
+    dropOffLocLabel.setBounds(41, 260, 110, 50);
+    pickupPanel.add(dropOffLocLabel);
+    
+    dropOffJCB.setBounds(160, 270, 165,35);
+    pickupPanel.add(dropOffJCB);
+    
+    // MouseListeners to clear text when JTextField is clicked
     
     fNameText.addMouseListener(new MouseAdapter() {
       @Override
@@ -234,16 +306,6 @@ public class RentalExpress {
         passText.setText("");
       }
     });
-    
-//    t1.setText("Test account Panel");
-//    t2.setText("Test pickup Panel");
-//    t3.setText("Test car Panel");
-//    t4.setText("Test final Panel");
-//    
-//    acctPanel.add(t1);
-//    pickupPanel.add(t2);
-//    carPanel.add(t3);
-//    finalPanel.add(t4);
     
     accBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
