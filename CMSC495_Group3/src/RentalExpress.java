@@ -1,4 +1,5 @@
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -260,10 +261,14 @@ public class RentalExpress {
     //------------------------------ Car Model Panel
     carPanel.setLayout(null);
     
-    ImageIcon dCharger2017 = new ImageIcon("test.jpg");
-    JButton dCharger2017Btn = new JButton(dCharger2017);
+    ImageIcon dCharger2017 = new ImageIcon("src/resources/test.jpg");
+    JButton dCharger2017Btn = new JButton("Test Text", dCharger2017);
     dCharger2017Btn.setRolloverEnabled(true);
-    dCharger2017Btn.setBounds(10, 10, 200, 150);
+    dCharger2017Btn.setBounds(10, 10, 250, 210);
+    dCharger2017Btn.setBackground(Color.WHITE);
+    dCharger2017Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    dCharger2017Btn.setHorizontalTextPosition(SwingConstants.CENTER);
+    
     carPanel.add(dCharger2017Btn);
     
     
