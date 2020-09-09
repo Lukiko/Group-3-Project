@@ -256,6 +256,8 @@ public class RentalExpress {
     dropOffJCB.setBounds(160, 270, 165,35);
     pickupPanel.add(dropOffJCB);
     
+    
+    
     // MouseListeners to clear text when JTextField is clicked
     
     fNameText.addMouseListener(new MouseAdapter() {
