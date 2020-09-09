@@ -284,7 +284,7 @@ public class RentalExpress {
     hellcatBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     hellcatBtn.setHorizontalTextPosition(SwingConstants.CENTER);
     hellcatBtn.setFocusPainted(false);
-    //carPanel.add(hellcatBtn);
+    carPanel.add(hellcatBtn);
     
     ImageIcon camry = new ImageIcon("src/resources/camry.jpg");
     JToggleButton camryBtn = new JToggleButton("<html><center>2020 Toyota Camry TRD<br> $96/day </center></html>", camry);
@@ -302,18 +302,17 @@ public class RentalExpress {
       public void actionPerformed(ActionEvent e) {
       }
     });
-    //carPanel.add(camryBtn);
+    carPanel.add(camryBtn);
     
     ImageIcon corvette = new ImageIcon("src/resources/corvette.jpg");
     JToggleButton corvetteBtn = new JToggleButton("<html><center>2020 Chevrolet Corvette<br> $135/day </center></html>", corvette);
     corvetteBtn.setRolloverEnabled(true);
-    //hellcatBtn.setBounds(10, 10, 250, 210);
     corvetteBtn.setBounds(470, 10, 220, 210);
     corvetteBtn.setBackground(Color.WHITE);
     corvetteBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     corvetteBtn.setHorizontalTextPosition(SwingConstants.CENTER);
     corvetteBtn.setFocusPainted(false);
-    //carPanel.add(corvetteBtn);
+    carPanel.add(corvetteBtn);
     
     
     
@@ -398,7 +397,7 @@ public class RentalExpress {
     
     carBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
-        card.show(cardPanel,  "p3");
+        card.show(cardPanel,  "p5");
       }
     });
     
