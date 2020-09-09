@@ -1,11 +1,13 @@
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 public class RentalExpress {
   
@@ -35,7 +38,7 @@ public class RentalExpress {
   JPanel carPanel = new JPanel();
   JPanel finalPanel = new JPanel();
   
-  JScrollPane carJSPanel = new JScrollPane();
+  JScrollPane carJSPanel = new JScrollPane(carPanel);
   
   JPanel acctGrid1 = new JPanel();
   JPanel acctGrid2 = new JPanel();
@@ -152,14 +155,13 @@ public class RentalExpress {
     buttonPanel.add(pickupBtn);
     buttonPanel.add(carBtn);
     buttonPanel.add(finalBtn);
-    buttonPanel.add(carJSPanel);
+    //buttonPanel.add(carJSPanel);
     
     cardPanel.setLayout(card);
     cardPanel.add(acctPanel, "p1");
     cardPanel.add(pickupPanel, "p2");
-    cardPanel.add(carPanel, "p3");
+    cardPanel.add(carJSPanel, "p3");
     cardPanel.add(finalPanel, "p4");
-    cardPanel.add(carJSPanel, "p5");
     
     // Account panel
     fNameText.setHorizontalAlignment(JTextField.CENTER);
@@ -272,8 +274,19 @@ public class RentalExpress {
     pickupPanel.add(dropOffJCB);
     
     //------------------------------ Car Model Panel
-    carPanel.setLayout(null);
     
+    GridLayout carLayout = new GridLayout(3, 3);
+    carPanel.setLayout(carLayout);
+    carLayout.setHgap(5);
+    carLayout.setVgap(5);
+    Border padding = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+    carPanel.setBorder(padding);
+    //carPanel.setLayout(null);
+    //carJSPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    //carJSPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    //carJSPanel.setPreferredSize(600, 1000);
+    //carJSPanel.setPreferredSize(new Dimension(600, 1000));
+    //carJSPanel.getViewport().add(carPanel);
     
     ImageIcon hellcat = new ImageIcon("src/resources/hellcat.jpg");
     JToggleButton hellcatBtn = new JToggleButton("<html><center>2017 Dodge Challenger Hellcat<br> $158/day </center></html>", hellcat);
@@ -314,23 +327,56 @@ public class RentalExpress {
     corvetteBtn.setFocusPainted(false);
     carPanel.add(corvetteBtn);
     
+    ImageIcon jeep = new ImageIcon("src/resources/jeep.jpg");
+    JToggleButton jeepBtn = new JToggleButton("<html><center>2020 Jeep Wrangler<br> $85/day </center></html>", jeep);
+    jeepBtn.setRolloverEnabled(true);
+    jeepBtn.setBounds(10, 230, 220, 210);
+    jeepBtn.setBackground(Color.WHITE);
+    jeepBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    jeepBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    jeepBtn.setFocusPainted(false);
+    carPanel.add(jeepBtn);
     
+    ImageIcon f150 = new ImageIcon("src/resources/f150.jpg");
+    JToggleButton f150Btn = new JToggleButton("<html><center>2020 Ford F-150<br> $92/day </center></html>", f150);
+    f150Btn.setRolloverEnabled(true);
+    f150Btn.setBounds(240, 230, 220, 210);
+    f150Btn.setBackground(Color.WHITE);
+    f150Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    f150Btn.setHorizontalTextPosition(SwingConstants.CENTER);
+    f150Btn.setFocusPainted(false);
+    carPanel.add(f150Btn);
+    
+    ImageIcon crv = new ImageIcon("src/resources/crv.jpg");
+    JToggleButton crvBtn = new JToggleButton("<html><center>2020 Honda CRV<br> $73/day </center></html>", crv);
+    crvBtn.setRolloverEnabled(true);
+    crvBtn.setBounds(470, 230, 220, 210);
+    crvBtn.setBackground(Color.WHITE);
+    crvBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    crvBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    crvBtn.setFocusPainted(false);
+    carPanel.add(crvBtn);
+    
+    ImageIcon typeR = new ImageIcon("src/resources/typer.jpg");
+    JToggleButton typeRBtn = new JToggleButton("<html><center>2020 Honda CRV<br> $73/day </center></html>", typeR);
+    typeRBtn.setRolloverEnabled(true);
+    typeRBtn.setBounds(10, 460, 220, 210);
+    typeRBtn.setBackground(Color.WHITE);
+    typeRBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    typeRBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    typeRBtn.setFocusPainted(false);
+    carPanel.add(typeRBtn);
     
     
     ButtonGroup carGroup = new ButtonGroup();
     carGroup.add(hellcatBtn);
     carGroup.add(camryBtn);
-    
-    
-    //------------------------------- Testing JScrollPane
-    
-    ButtonGroup carJSGroup = new ButtonGroup();
-    carJSGroup.add(hellcatBtn);
-    carJSGroup.add(camryBtn);
-    
-    carJSPanel.add(hellcatBtn);
-    carJSPanel.add(camryBtn);
-    carJSPanel.add(corvetteBtn);
+    carGroup.add(corvetteBtn);
+    carGroup.add(jeepBtn);
+    carGroup.add(f150Btn);
+    carGroup.add(crvBtn);
+    carGroup.add(typeRBtn);
+
     
     // MouseListeners to clear text when JTextField is clicked
     
@@ -397,7 +443,7 @@ public class RentalExpress {
     
     carBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
-        card.show(cardPanel,  "p5");
+        card.show(cardPanel,  "p3");
       }
     });
     
