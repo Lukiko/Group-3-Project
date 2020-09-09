@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -255,6 +256,17 @@ public class RentalExpress {
     
     dropOffJCB.setBounds(160, 270, 165,35);
     pickupPanel.add(dropOffJCB);
+    
+    //------------------------------ Car Model Panel
+    carPanel.setLayout(null);
+    
+    ImageIcon dCharger2017 = new ImageIcon("test.jpg");
+    JButton dCharger2017Btn = new JButton(dCharger2017);
+    dCharger2017Btn.setRolloverEnabled(true);
+    dCharger2017Btn.setBounds(10, 10, 200, 150);
+    carPanel.add(dCharger2017Btn);
+    
+    
     
     
     
