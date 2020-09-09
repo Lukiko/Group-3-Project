@@ -275,12 +275,13 @@ public class RentalExpress {
     
     //------------------------------ Car Model Panel
     
-    GridLayout carLayout = new GridLayout(3, 3);
+    GridLayout carLayout = new GridLayout(4, 3);
     carPanel.setLayout(carLayout);
     carLayout.setHgap(5);
     carLayout.setVgap(5);
     Border padding = BorderFactory.createEmptyBorder(5, 5, 5, 5);
     carPanel.setBorder(padding);
+    carJSPanel.getVerticalScrollBar().setUnitIncrement(15);
     //carPanel.setLayout(null);
     //carJSPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     //carJSPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -299,23 +300,23 @@ public class RentalExpress {
     hellcatBtn.setFocusPainted(false);
     carPanel.add(hellcatBtn);
     
-    ImageIcon camry = new ImageIcon("src/resources/camry.jpg");
-    JToggleButton camryBtn = new JToggleButton("<html><center>2020 Toyota Camry TRD<br> $96/day </center></html>", camry);
-    camryBtn.setRolloverEnabled(true);
-    camryBtn.setBounds(240, 10, 220, 210);
-    camryBtn.setBackground(Color.WHITE);
-    camryBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
-    camryBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    ImageIcon camrytrd = new ImageIcon("src/resources/camrytrd.jpg");
+    JToggleButton camryTRDBtn = new JToggleButton("<html><center>2020 Toyota Camry TRD<br> $96/day </center></html>", camrytrd);
+    camryTRDBtn.setRolloverEnabled(true);
+    camryTRDBtn.setBounds(240, 10, 220, 210);
+    camryTRDBtn.setBackground(Color.WHITE);
+    camryTRDBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    camryTRDBtn.setHorizontalTextPosition(SwingConstants.CENTER);
     // --------- remove these?
-    camryBtn.setRolloverIcon(camry);
-    camryBtn.setPressedIcon(camry);
+    camryTRDBtn.setRolloverIcon(camrytrd);
+    camryTRDBtn.setPressedIcon(camrytrd);
     // ---------
-    camryBtn.setFocusPainted(false);
-    camryBtn.addActionListener(new ActionListener() {
+    camryTRDBtn.setFocusPainted(false);
+    camryTRDBtn.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
       }
     });
-    carPanel.add(camryBtn);
+    carPanel.add(camryTRDBtn);
     
     ImageIcon corvette = new ImageIcon("src/resources/corvette.jpg");
     JToggleButton corvetteBtn = new JToggleButton("<html><center>2020 Chevrolet Corvette<br> $135/day </center></html>", corvette);
@@ -358,7 +359,7 @@ public class RentalExpress {
     carPanel.add(crvBtn);
     
     ImageIcon typeR = new ImageIcon("src/resources/typer.jpg");
-    JToggleButton typeRBtn = new JToggleButton("<html><center>2020 Honda CRV<br> $73/day </center></html>", typeR);
+    JToggleButton typeRBtn = new JToggleButton("<html><center>2020 Honda Civic Type R<br> $104/day </center></html>", typeR);
     typeRBtn.setRolloverEnabled(true);
     typeRBtn.setBounds(10, 460, 220, 210);
     typeRBtn.setBackground(Color.WHITE);
@@ -367,10 +368,43 @@ public class RentalExpress {
     typeRBtn.setFocusPainted(false);
     carPanel.add(typeRBtn);
     
+    ImageIcon camry = new ImageIcon("src/resources/camry.jpg");
+    JToggleButton camryBtn = new JToggleButton("<html><center>2020 Toyota Camry<br> $72/day </center></html>", camry);
+    camryBtn.setRolloverEnabled(true);
+    camryBtn.setBounds(10, 460, 220, 210);
+    camryBtn.setBackground(Color.WHITE);
+    camryBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    camryBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    camryBtn.setFocusPainted(false);
+    carPanel.add(camryBtn);
+    
+    ImageIcon corolla = new ImageIcon("src/resources/corolla.jpg");
+    JToggleButton corollaBtn = new JToggleButton("<html><center>2020 Toyota Corolla<br> $57/day </center></html>", corolla);
+    corollaBtn.setRolloverEnabled(true);
+    corollaBtn.setBounds(10, 460, 220, 210);
+    corollaBtn.setBackground(Color.WHITE);
+    corollaBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    corollaBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    corollaBtn.setFocusPainted(false);
+    carPanel.add(corollaBtn);
+    
+    ImageIcon elantra = new ImageIcon("src/resources/elantra.jpg");
+    JToggleButton elantraBtn = new JToggleButton("<html><center>2020 Toyota Corolla<br> $57/day </center></html>", elantra);
+    elantraBtn.setRolloverEnabled(true);
+    elantraBtn.setBounds(10, 460, 220, 210);
+    elantraBtn.setBackground(Color.WHITE);
+    elantraBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    elantraBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    elantraBtn.setFocusPainted(false);
+    carPanel.add(elantraBtn);
+    
+    
+    
+    
     
     ButtonGroup carGroup = new ButtonGroup();
     carGroup.add(hellcatBtn);
-    carGroup.add(camryBtn);
+    carGroup.add(camryTRDBtn);
     carGroup.add(corvetteBtn);
     carGroup.add(jeepBtn);
     carGroup.add(f150Btn);
