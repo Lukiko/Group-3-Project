@@ -6,15 +6,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 public class RentalExpress {
@@ -31,6 +34,8 @@ public class RentalExpress {
   JPanel pickupPanel = new JPanel();
   JPanel carPanel = new JPanel();
   JPanel finalPanel = new JPanel();
+  
+  JScrollPane carJSPanel = new JScrollPane();
   
   JPanel acctGrid1 = new JPanel();
   JPanel acctGrid2 = new JPanel();
@@ -139,16 +144,22 @@ public class RentalExpress {
     sp.setDividerLocation(150);
     
     buttonPanel.setLayout(new GridLayout(4, 1));
+    accBtn.setFocusPainted(false);
+    pickupBtn.setFocusPainted(false);
+    carBtn.setFocusPainted(false);
+    finalBtn.setFocusPainted(false);
     buttonPanel.add(accBtn);
     buttonPanel.add(pickupBtn);
     buttonPanel.add(carBtn);
     buttonPanel.add(finalBtn);
+    buttonPanel.add(carJSPanel);
     
     cardPanel.setLayout(card);
     cardPanel.add(acctPanel, "p1");
     cardPanel.add(pickupPanel, "p2");
     cardPanel.add(carPanel, "p3");
     cardPanel.add(finalPanel, "p4");
+    cardPanel.add(carJSPanel, "p5");
     
     // Account panel
     fNameText.setHorizontalAlignment(JTextField.CENTER);
@@ -158,6 +169,8 @@ public class RentalExpress {
     emailText.setHorizontalAlignment(JTextField.CENTER);
     userText.setHorizontalAlignment(JTextField.CENTER);
     passText.setHorizontalAlignment(JTextField.CENTER);
+    
+    regBtn.setFocusPainted(false);
     
     acctPanel.setLayout(new GridLayout(18, 1));
     acctPanel.add(acctGrid1);
@@ -261,19 +274,64 @@ public class RentalExpress {
     //------------------------------ Car Model Panel
     carPanel.setLayout(null);
     
-    ImageIcon dCharger2017 = new ImageIcon("src/resources/test.jpg");
-    JButton dCharger2017Btn = new JButton("Test Text", dCharger2017);
-    dCharger2017Btn.setRolloverEnabled(true);
-    dCharger2017Btn.setBounds(10, 10, 250, 210);
-    dCharger2017Btn.setBackground(Color.WHITE);
-    dCharger2017Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
-    dCharger2017Btn.setHorizontalTextPosition(SwingConstants.CENTER);
     
-    carPanel.add(dCharger2017Btn);
+    ImageIcon hellcat = new ImageIcon("src/resources/hellcat.jpg");
+    JToggleButton hellcatBtn = new JToggleButton("<html><center>2017 Dodge Challenger Hellcat<br> $158/day </center></html>", hellcat);
+    hellcatBtn.setRolloverEnabled(true);
+    //hellcatBtn.setBounds(10, 10, 250, 210);
+    hellcatBtn.setBounds(10, 10, 220, 210);
+    hellcatBtn.setBackground(Color.WHITE);
+    hellcatBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    hellcatBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    hellcatBtn.setFocusPainted(false);
+    carPanel.add(hellcatBtn);
+    
+    ImageIcon camry = new ImageIcon("src/resources/camry.jpg");
+    JToggleButton camryBtn = new JToggleButton("<html><center>2020 Toyota Camry TRD<br> $96/day </center></html>", camry);
+    camryBtn.setRolloverEnabled(true);
+    camryBtn.setBounds(240, 10, 220, 210);
+    camryBtn.setBackground(Color.WHITE);
+    camryBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    camryBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    // --------- remove these?
+    camryBtn.setRolloverIcon(camry);
+    camryBtn.setPressedIcon(camry);
+    // ---------
+    camryBtn.setFocusPainted(false);
+    camryBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+      }
+    });
+    carPanel.add(camryBtn);
+    
+    ImageIcon corvette = new ImageIcon("src/resources/corvette.jpg");
+    JToggleButton corvetteBtn = new JToggleButton("<html><center>2020 Chevrolet Corvette<br> $135/day </center></html>", corvette);
+    corvetteBtn.setRolloverEnabled(true);
+    //hellcatBtn.setBounds(10, 10, 250, 210);
+    corvetteBtn.setBounds(470, 10, 220, 210);
+    corvetteBtn.setBackground(Color.WHITE);
+    corvetteBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    corvetteBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    corvetteBtn.setFocusPainted(false);
+    carPanel.add(corvetteBtn);
     
     
     
     
+    ButtonGroup carGroup = new ButtonGroup();
+    carGroup.add(hellcatBtn);
+    carGroup.add(camryBtn);
+    
+    
+    //------------------------------- Testing JScrollPane
+    
+    ButtonGroup carJSGroup = new ButtonGroup();
+    carJSGroup.add(hellcatBtn);
+    carJSGroup.add(camryBtn);
+    
+    carJSPanel.add(hellcatBtn);
+    carJSPanel.add(camryBtn);
+    carJSPanel.add(corvetteBtn);
     
     // MouseListeners to clear text when JTextField is clicked
     
@@ -340,7 +398,7 @@ public class RentalExpress {
     
     carBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
-        card.show(cardPanel,  "p3");
+        card.show(cardPanel,  "p5");
       }
     });
     
