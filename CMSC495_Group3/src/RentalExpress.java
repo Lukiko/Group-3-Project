@@ -275,7 +275,7 @@ public class RentalExpress {
     
     //------------------------------ Car Model Panel
     
-    GridLayout carLayout = new GridLayout(4, 3);
+    GridLayout carLayout = new GridLayout(5, 3);
     carPanel.setLayout(carLayout);
     carLayout.setHgap(5);
     carLayout.setVgap(5);
@@ -292,7 +292,6 @@ public class RentalExpress {
     ImageIcon hellcat = new ImageIcon("src/resources/hellcat.jpg");
     JToggleButton hellcatBtn = new JToggleButton("<html><center>2017 Dodge Challenger Hellcat<br> $158/day </center></html>", hellcat);
     hellcatBtn.setRolloverEnabled(true);
-    //hellcatBtn.setBounds(10, 10, 250, 210);
     hellcatBtn.setBounds(10, 10, 220, 210);
     hellcatBtn.setBackground(Color.WHITE);
     hellcatBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -307,10 +306,6 @@ public class RentalExpress {
     camryTRDBtn.setBackground(Color.WHITE);
     camryTRDBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     camryTRDBtn.setHorizontalTextPosition(SwingConstants.CENTER);
-    // --------- remove these?
-    camryTRDBtn.setRolloverIcon(camrytrd);
-    camryTRDBtn.setPressedIcon(camrytrd);
-    // ---------
     camryTRDBtn.setFocusPainted(false);
     camryTRDBtn.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -389,7 +384,7 @@ public class RentalExpress {
     carPanel.add(corollaBtn);
     
     ImageIcon elantra = new ImageIcon("src/resources/elantra.jpg");
-    JToggleButton elantraBtn = new JToggleButton("<html><center>2020 Toyota Corolla<br> $57/day </center></html>", elantra);
+    JToggleButton elantraBtn = new JToggleButton("<html><center>2020 Hyundai Elantra <br> $52/day </center></html>", elantra);
     elantraBtn.setRolloverEnabled(true);
     elantraBtn.setBounds(10, 460, 220, 210);
     elantraBtn.setBackground(Color.WHITE);
@@ -397,6 +392,56 @@ public class RentalExpress {
     elantraBtn.setHorizontalTextPosition(SwingConstants.CENTER);
     elantraBtn.setFocusPainted(false);
     carPanel.add(elantraBtn);
+    
+    ImageIcon explorer = new ImageIcon("src/resources/explorer.jpg");
+    JToggleButton explorerBtn = new JToggleButton("<html><center>2020 Ford Explorer <br> $85/day </center></html>", explorer);
+    explorerBtn.setRolloverEnabled(true);
+    explorerBtn.setBounds(10, 460, 220, 210);
+    explorerBtn.setBackground(Color.WHITE);
+    explorerBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    explorerBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    explorerBtn.setFocusPainted(false);
+    carPanel.add(explorerBtn);
+    
+    ImageIcon mazda3 = new ImageIcon("src/resources/mazda3.jpg");
+    JToggleButton mazda3Btn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", mazda3);
+    mazda3Btn.setRolloverEnabled(true);
+    mazda3Btn.setBounds(10, 460, 220, 210);
+    mazda3Btn.setBackground(Color.WHITE);
+    mazda3Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    mazda3Btn.setHorizontalTextPosition(SwingConstants.CENTER);
+    mazda3Btn.setFocusPainted(false);
+    carPanel.add(mazda3Btn);
+    
+    ImageIcon highlander = new ImageIcon("src/resources/highlander.jpg");
+    JToggleButton highlanderBtn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", highlander);
+    highlanderBtn.setRolloverEnabled(true);
+    highlanderBtn.setBounds(10, 460, 220, 210);
+    highlanderBtn.setBackground(Color.WHITE);
+    highlanderBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    highlanderBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    highlanderBtn.setFocusPainted(false);
+    carPanel.add(highlanderBtn);
+    
+    ImageIcon supra = new ImageIcon("src/resources/supra.jpg");
+    JToggleButton supraBtn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", supra);
+    supraBtn.setRolloverEnabled(true);
+    supraBtn.setBounds(10, 460, 220, 210);
+    supraBtn.setBackground(Color.WHITE);
+    supraBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    supraBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    supraBtn.setFocusPainted(false);
+    carPanel.add(supraBtn);
+    
+    ImageIcon wrx = new ImageIcon("src/resources/wrx.jpg");
+    JToggleButton wrxBtn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", wrx);
+    wrxBtn.setRolloverEnabled(true);
+    wrxBtn.setBounds(10, 460, 220, 210);
+    wrxBtn.setBackground(Color.WHITE);
+    wrxBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
+    wrxBtn.setHorizontalTextPosition(SwingConstants.CENTER);
+    wrxBtn.setFocusPainted(false);
+    carPanel.add(wrxBtn);
     
     
     
@@ -410,6 +455,11 @@ public class RentalExpress {
     carGroup.add(f150Btn);
     carGroup.add(crvBtn);
     carGroup.add(typeRBtn);
+    carGroup.add(corollaBtn);
+    carGroup.add(camryBtn);
+    carGroup.add(elantraBtn);
+    carGroup.add(explorerBtn);
+    carGroup.add(mazda3Btn);
 
     
     // MouseListeners to clear text when JTextField is clicked
