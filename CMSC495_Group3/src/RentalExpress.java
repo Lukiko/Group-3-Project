@@ -853,8 +853,9 @@ public class RentalExpress {
           break;
       }
       
-      int numMonths = 0;
+      int numMonths = dropoffNum - pickupNum;
       int numDays = 0;
+      
       
       if (dropoffYear > pickupYear) {
         numMonths = dropoffNum + (11 - pickupNum);
@@ -862,16 +863,29 @@ public class RentalExpress {
         System.out.println(numMonths);
         return numDays;
       }
-      else {
-        numMonths = dropoffNum - pickupNum - 1;
-        if (numMonths > 0) {
-          numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
-          return numDays;
-        }
+      if (dropoffNum - pickupNum == 0){
+        numDays = dropoffDay - pickupDay;
+        return numDays;
+//        numMonths = dropoffNum - pickupNum;
+//        if (numMonths > 0) {
+//          numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
+//          return numDays;
+      }
+      if (numMonths == 1) {
         numDays = (30 - pickupDay) + dropoffDay;
+        return numDays;
+      }
+      else {
+        numMonths = (dropoffNum - pickupNum) - 1;
+        numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
+        System.out.println(dropoffNum);
+        System.out.println(pickupNum);
         System.out.println(numMonths);
         return numDays;
       }
+//        numDays = (30 - pickupDay) + dropoffDay;
+//        System.out.println(numMonths);
+//        return numDays;
     } else {
       return 0;
     }
