@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -39,6 +41,8 @@ public class RentalExpress {
   
   private String whichCar = "";
   private int carPrice;
+  private int totalPrice;
+  private int numRentalDays;
   
   JFrame frame = new JFrame("Rental Express");
   
@@ -474,6 +478,7 @@ public class RentalExpress {
     
     JTextArea jt = new JTextArea("Test area");
     
+    finalPanel.setBackground(Color.white);
     finalPanel.add(jt);
     
     
@@ -483,11 +488,15 @@ public class RentalExpress {
       public void actionPerformed(ActionEvent e) {
         jt.setText("");
         
+        totalPrice = 0;
+        
         if (carSelected) {
           if (acctMade) {
 
             checkCustomer();
 
+            numRentalDays = getRentalDays();
+            
             pickupLoc = (String) pickUpJCB.getSelectedItem();
             pickupDay = (Integer) puDayJCB.getSelectedItem();
             pickupMonth = (String) puMonthJCB.getSelectedItem();
@@ -500,12 +509,27 @@ public class RentalExpress {
             jt.append("Customer Name: " + c.getFirstName() + " " + c.getLastName() + "\n");
             jt.append("Contact Info: " + c.getEmail() + "\n\n");
             jt.append("Rental Car: " + whichCar + "\n");
-            jt.append("Price per day: $" + carPrice);
-            jt.append(
-                "Pickup Location: " + pickupLoc + " on " + pickupMonth + " " + pickupDay + ", " + pickupYear + "\n");
+            jt.append("Price per day: $" + carPrice + "\n");
+            jt.append("Pickup Location: " + pickupLoc + " on " + pickupMonth + " " + pickupDay + ", " + pickupYear + "\n");
             jt.append("Dropoff Location: " + dropoffLoc + " on " + dropoffMonth + " " + dropoffDay + ", " + dropoffYear
                 + "\n");
-            jt.append("Number of Days: " + getRentalDays());
+            jt.append("Number of Days: " + numRentalDays + "\n\n");
+            
+            if (pickupLoc != dropoffLoc) {
+              jt.append("Surcharge for dropping vehicle off at a different location: $50\n");
+              totalPrice += 50;
+            }
+            totalPrice += carPrice * numRentalDays;
+            jt.append(whichCar + " for " + numRentalDays + " days: " + "$" + 
+              totalPrice + "\n");
+            //double salesTax = Math.round(((totalPrice * .053) * 100.0)/ 100.0);
+            double salesTaxRaw = totalPrice * .053;
+            double salesTax = round(salesTaxRaw, 2);
+            //BigDecimal salesTax = BigDecimal.valueOf(salesTaxRaw);
+            //salesTax = salesTax.setScale(2, RoundingMode.HALF_UP);
+            jt.append("VA Sales Tax: $" + salesTax + "\n");
+            jt.append("Total: $" + (salesTax + totalPrice));
+            
           } else {
             card.show(cardPanel,  "p1");
             JOptionPane.showMessageDialog(null, "Please create a customer account");
@@ -759,6 +783,14 @@ public class RentalExpress {
     frame.add(sp);
     frame.setVisible(true);
     frame.setResizable(false);
+  }
+  
+  public static double round(double value, int places) {
+    if (places < 0) throw new IllegalArgumentException();
+
+    BigDecimal bd = BigDecimal.valueOf(value);
+    bd = bd.setScale(places, RoundingMode.HALF_UP);
+    return bd.doubleValue();
   }
   
   public Integer getRentalDays() {
