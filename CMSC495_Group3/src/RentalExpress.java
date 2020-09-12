@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -27,7 +28,18 @@ public class RentalExpress {
   
   private String fName, lName, addr1, addr2, email, user, pass, month;
   private int day, year;
+  
+  private String pickupLoc, pickupMonth, dropoffLoc, dropoffMonth;
+  private int pickupDay, pickupYear, dropoffDay, dropoffYear;
 
+  Customer c = new Customer();
+  
+  boolean acctMade = false;
+  boolean carSelected = false;
+  
+  private String whichCar = "";
+  private int carPrice;
+  
   JFrame frame = new JFrame("Rental Express");
   
   JPanel buttonPanel = new JPanel();
@@ -282,17 +294,11 @@ public class RentalExpress {
     Border padding = BorderFactory.createEmptyBorder(5, 5, 5, 5);
     carPanel.setBorder(padding);
     carJSPanel.getVerticalScrollBar().setUnitIncrement(15);
-    //carPanel.setLayout(null);
-    //carJSPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-    //carJSPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    //carJSPanel.setPreferredSize(600, 1000);
-    //carJSPanel.setPreferredSize(new Dimension(600, 1000));
-    //carJSPanel.getViewport().add(carPanel);
     
     ImageIcon hellcat = new ImageIcon("src/resources/hellcat.jpg");
     JToggleButton hellcatBtn = new JToggleButton("<html><center>2017 Dodge Challenger Hellcat<br> $158/day </center></html>", hellcat);
     hellcatBtn.setRolloverEnabled(true);
-    hellcatBtn.setBounds(10, 10, 220, 210);
+//    hellcatBtn.setBounds(10, 10, 220, 210);
     hellcatBtn.setBackground(Color.WHITE);
     hellcatBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     hellcatBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -302,7 +308,7 @@ public class RentalExpress {
     ImageIcon camrytrd = new ImageIcon("src/resources/camrytrd.jpg");
     JToggleButton camryTRDBtn = new JToggleButton("<html><center>2020 Toyota Camry TRD<br> $96/day </center></html>", camrytrd);
     camryTRDBtn.setRolloverEnabled(true);
-    camryTRDBtn.setBounds(240, 10, 220, 210);
+//    camryTRDBtn.setBounds(240, 10, 220, 210);
     camryTRDBtn.setBackground(Color.WHITE);
     camryTRDBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     camryTRDBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -316,7 +322,7 @@ public class RentalExpress {
     ImageIcon corvette = new ImageIcon("src/resources/corvette.jpg");
     JToggleButton corvetteBtn = new JToggleButton("<html><center>2020 Chevrolet Corvette<br> $135/day </center></html>", corvette);
     corvetteBtn.setRolloverEnabled(true);
-    corvetteBtn.setBounds(470, 10, 220, 210);
+//    corvetteBtn.setBounds(470, 10, 220, 210);
     corvetteBtn.setBackground(Color.WHITE);
     corvetteBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     corvetteBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -326,7 +332,7 @@ public class RentalExpress {
     ImageIcon jeep = new ImageIcon("src/resources/jeep.jpg");
     JToggleButton jeepBtn = new JToggleButton("<html><center>2020 Jeep Wrangler<br> $85/day </center></html>", jeep);
     jeepBtn.setRolloverEnabled(true);
-    jeepBtn.setBounds(10, 230, 220, 210);
+//    jeepBtn.setBounds(10, 230, 220, 210);
     jeepBtn.setBackground(Color.WHITE);
     jeepBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     jeepBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -336,7 +342,7 @@ public class RentalExpress {
     ImageIcon f150 = new ImageIcon("src/resources/f150.jpg");
     JToggleButton f150Btn = new JToggleButton("<html><center>2020 Ford F-150<br> $92/day </center></html>", f150);
     f150Btn.setRolloverEnabled(true);
-    f150Btn.setBounds(240, 230, 220, 210);
+//    f150Btn.setBounds(240, 230, 220, 210);
     f150Btn.setBackground(Color.WHITE);
     f150Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
     f150Btn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -346,7 +352,7 @@ public class RentalExpress {
     ImageIcon crv = new ImageIcon("src/resources/crv.jpg");
     JToggleButton crvBtn = new JToggleButton("<html><center>2020 Honda CRV<br> $73/day </center></html>", crv);
     crvBtn.setRolloverEnabled(true);
-    crvBtn.setBounds(470, 230, 220, 210);
+//    crvBtn.setBounds(470, 230, 220, 210);
     crvBtn.setBackground(Color.WHITE);
     crvBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     crvBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -356,7 +362,7 @@ public class RentalExpress {
     ImageIcon typeR = new ImageIcon("src/resources/typer.jpg");
     JToggleButton typeRBtn = new JToggleButton("<html><center>2020 Honda Civic Type R<br> $104/day </center></html>", typeR);
     typeRBtn.setRolloverEnabled(true);
-    typeRBtn.setBounds(10, 460, 220, 210);
+//    typeRBtn.setBounds(10, 460, 220, 210);
     typeRBtn.setBackground(Color.WHITE);
     typeRBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     typeRBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -366,7 +372,7 @@ public class RentalExpress {
     ImageIcon camry = new ImageIcon("src/resources/camry.jpg");
     JToggleButton camryBtn = new JToggleButton("<html><center>2020 Toyota Camry<br> $72/day </center></html>", camry);
     camryBtn.setRolloverEnabled(true);
-    camryBtn.setBounds(10, 460, 220, 210);
+//    camryBtn.setBounds(10, 460, 220, 210);
     camryBtn.setBackground(Color.WHITE);
     camryBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     camryBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -376,7 +382,7 @@ public class RentalExpress {
     ImageIcon corolla = new ImageIcon("src/resources/corolla.jpg");
     JToggleButton corollaBtn = new JToggleButton("<html><center>2020 Toyota Corolla<br> $57/day </center></html>", corolla);
     corollaBtn.setRolloverEnabled(true);
-    corollaBtn.setBounds(10, 460, 220, 210);
+//    corollaBtn.setBounds(10, 460, 220, 210);
     corollaBtn.setBackground(Color.WHITE);
     corollaBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     corollaBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -386,7 +392,7 @@ public class RentalExpress {
     ImageIcon elantra = new ImageIcon("src/resources/elantra.jpg");
     JToggleButton elantraBtn = new JToggleButton("<html><center>2020 Hyundai Elantra <br> $52/day </center></html>", elantra);
     elantraBtn.setRolloverEnabled(true);
-    elantraBtn.setBounds(10, 460, 220, 210);
+//    elantraBtn.setBounds(10, 460, 220, 210);
     elantraBtn.setBackground(Color.WHITE);
     elantraBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     elantraBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -396,7 +402,7 @@ public class RentalExpress {
     ImageIcon explorer = new ImageIcon("src/resources/explorer.jpg");
     JToggleButton explorerBtn = new JToggleButton("<html><center>2020 Ford Explorer <br> $85/day </center></html>", explorer);
     explorerBtn.setRolloverEnabled(true);
-    explorerBtn.setBounds(10, 460, 220, 210);
+//    explorerBtn.setBounds(10, 460, 220, 210);
     explorerBtn.setBackground(Color.WHITE);
     explorerBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     explorerBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -406,7 +412,7 @@ public class RentalExpress {
     ImageIcon mazda3 = new ImageIcon("src/resources/mazda3.jpg");
     JToggleButton mazda3Btn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", mazda3);
     mazda3Btn.setRolloverEnabled(true);
-    mazda3Btn.setBounds(10, 460, 220, 210);
+//    mazda3Btn.setBounds(10, 460, 220, 210);
     mazda3Btn.setBackground(Color.WHITE);
     mazda3Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
     mazda3Btn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -414,9 +420,9 @@ public class RentalExpress {
     carPanel.add(mazda3Btn);
     
     ImageIcon highlander = new ImageIcon("src/resources/highlander.jpg");
-    JToggleButton highlanderBtn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", highlander);
+    JToggleButton highlanderBtn = new JToggleButton("<html><center>2020 Toyota Highaldner <br> $82/day </center></html>", highlander);
     highlanderBtn.setRolloverEnabled(true);
-    highlanderBtn.setBounds(10, 460, 220, 210);
+//    highlanderBtn.setBounds(10, 460, 220, 210);
     highlanderBtn.setBackground(Color.WHITE);
     highlanderBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     highlanderBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -424,9 +430,9 @@ public class RentalExpress {
     carPanel.add(highlanderBtn);
     
     ImageIcon supra = new ImageIcon("src/resources/supra.jpg");
-    JToggleButton supraBtn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", supra);
+    JToggleButton supraBtn = new JToggleButton("<html><center>2020 Toyota Supra <br> $74/day </center></html>", supra);
     supraBtn.setRolloverEnabled(true);
-    supraBtn.setBounds(10, 460, 220, 210);
+//    supraBtn.setBounds(10, 460, 220, 210);
     supraBtn.setBackground(Color.WHITE);
     supraBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     supraBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -434,9 +440,9 @@ public class RentalExpress {
     carPanel.add(supraBtn);
     
     ImageIcon wrx = new ImageIcon("src/resources/wrx.jpg");
-    JToggleButton wrxBtn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", wrx);
+    JToggleButton wrxBtn = new JToggleButton("<html><center>2020 Subaru WRX <br> $97/day </center></html>", wrx);
     wrxBtn.setRolloverEnabled(true);
-    wrxBtn.setBounds(10, 460, 220, 210);
+//    wrxBtn.setBounds(10, 460, 220, 210);
     wrxBtn.setBackground(Color.WHITE);
     wrxBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     wrxBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -460,7 +466,178 @@ public class RentalExpress {
     carGroup.add(elantraBtn);
     carGroup.add(explorerBtn);
     carGroup.add(mazda3Btn);
+    carGroup.add(wrxBtn);
+    carGroup.add(supraBtn);
+    carGroup.add(highlanderBtn);
 
+    // ------------------------------------- Checkout Panel
+    
+    JTextArea jt = new JTextArea("Test area");
+    
+    finalPanel.add(jt);
+    
+    
+    // ActionListener for Checkout Button
+    
+    finalBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jt.setText("");
+        
+        if (carSelected) {
+          if (acctMade) {
+
+            checkCustomer();
+
+            pickupLoc = (String) pickUpJCB.getSelectedItem();
+            pickupDay = (Integer) puDayJCB.getSelectedItem();
+            pickupMonth = (String) puMonthJCB.getSelectedItem();
+            pickupYear = (Integer) puYearJCB.getSelectedItem();
+            dropoffLoc = (String) dropOffJCB.getSelectedItem();
+            dropoffDay = (Integer) doDayJCB.getSelectedItem();
+            dropoffMonth = (String) doMonthJCB.getSelectedItem();
+            dropoffYear = (Integer) doYearJCB.getSelectedItem();
+
+            jt.append("Customer Name: " + c.getFirstName() + " " + c.getLastName() + "\n");
+            jt.append("Contact Info: " + c.getEmail() + "\n\n");
+            jt.append("Rental Car: " + whichCar + "\n");
+            jt.append("Price per day: $" + carPrice);
+            jt.append(
+                "Pickup Location: " + pickupLoc + " on " + pickupMonth + " " + pickupDay + ", " + pickupYear + "\n");
+            jt.append("Dropoff Location: " + dropoffLoc + " on " + dropoffMonth + " " + dropoffDay + ", " + dropoffYear
+                + "\n");
+            jt.append("Number of Days: " + getRentalDays());
+          } else {
+            card.show(cardPanel,  "p1");
+            JOptionPane.showMessageDialog(null, "Please create a customer account");
+          }
+        } else {
+          card.show(cardPanel,  "p3");
+          JOptionPane.showMessageDialog(null, "Please select a car");
+        }
+      }
+    });
+    
+    // ActionListeners for Cars
+    
+    hellcatBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Dodge Challenger Hellcat";
+        carSelected = true;
+        carPrice = 158;
+      }
+    });
+    
+    camryTRDBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Toyota Camry TRD";
+        carSelected = true;
+        carPrice = 96;
+      }
+    });
+    
+    corvetteBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Chevrolet Corvette";
+        carSelected = true;
+        carPrice = 135;
+      }
+    });
+    
+    jeepBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Jeep Wrangler";
+        carSelected = true;
+        carPrice = 85;
+      }
+    });
+    
+    f150Btn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Ford F-150";
+        carSelected = true;
+        carPrice = 92;
+      }
+    });
+    
+    crvBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Honda CR-V";
+        carSelected = true;
+        carPrice = 73;
+      }
+    });
+    
+    typeRBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Honda Civic Type R";
+        carSelected = true;
+        carPrice = 104;
+      }
+    });
+    
+    corollaBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Toyota Corolla";
+        carSelected = true;
+        carPrice = 72;
+      }
+    });
+    
+    camryBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Toyota Camry";
+        carSelected = true;
+        carPrice = 57;
+      }
+    });
+    
+    elantraBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Hyundai Elantra";
+        carSelected = true;
+        carPrice = 52;
+      }
+    });
+    
+    explorerBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Ford Explorer";
+        carSelected = true;
+        carPrice = 85;
+      }
+    });
+    
+    mazda3Btn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Mazda 3";
+        carSelected = true;
+        carPrice = 51;
+      }
+    });
+    
+    wrxBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Subaru WRX";
+        carSelected = true;
+        carPrice = 97;
+      }
+    });
+    
+    supraBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Toyota Supra";
+        carSelected = true;
+        carPrice = 74;
+      }
+    });
+    
+    highlanderBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        whichCar = "2020 Toyota Highlander";
+        carSelected = true;
+        carPrice = 82;
+      }
+    });
     
     // MouseListeners to clear text when JTextField is clicked
     
@@ -468,6 +645,7 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         fNameText.setText("");
+        fNameText.setForeground(Color.black);
       }
     });
     
@@ -475,6 +653,7 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         lNameText.setText("");
+        lNameText.setForeground(Color.black);
       }
     });
     
@@ -482,6 +661,7 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         addrText1.setText("");
+        addrText1.setForeground(Color.black);
       }
     });
     
@@ -489,6 +669,7 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         addrText2.setText("");
+        addrText2.setForeground(Color.black);
       }
     });
     
@@ -496,6 +677,7 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         emailText.setText("");
+        emailText.setForeground(Color.black);
       }
     });
     
@@ -503,6 +685,7 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         userText.setText("");
+        userText.setForeground(Color.black);
       }
     });
     
@@ -510,6 +693,7 @@ public class RentalExpress {
       @Override
       public void mouseClicked(MouseEvent e) {
         passText.setText("");
+        passText.setForeground(Color.black);
       }
     });
     
@@ -540,6 +724,8 @@ public class RentalExpress {
     regBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         
+        if (checkCustomer()) {
+        
         fName = fNameText.getText();
         lName = lNameText.getText();
         addr1 = addrText1.getText();
@@ -551,12 +737,20 @@ public class RentalExpress {
         day = (Integer) birthDayJCB.getSelectedItem();
         year = (Integer) birthYearJCB.getSelectedItem();
         
-        
-        Customer c = new Customer(fName, lName, addr1, addr2, email, user, pass, month, day, year);
+        c.setFirstName(fName);
+        c.setLastName(lName);
+        c.setAddress1(addr1);
+        c.setAddress2(addr2);
+        c.setEmail(email);
+        c.setUsername(user);
+        c.setPassword(pass);
+        c.setMonth(month);
+        c.setDay(day);
+        c.setYear(year);
         
         card.show(cardPanel, "p2");
         
-        c.display();
+        }
         
       }
     });
@@ -567,7 +761,291 @@ public class RentalExpress {
     frame.setResizable(false);
   }
   
+  public Integer getRentalDays() {
+    
+    if (checkRentalDays()) {
+      
+      int pickupNum = 0;
+      int dropoffNum = 0;
+      
+      pickupDay = (Integer) puDayJCB.getSelectedItem();
+      pickupMonth = (String) puMonthJCB.getSelectedItem();
+      pickupYear = (Integer) puYearJCB.getSelectedItem();
+      dropoffDay = (Integer) doDayJCB.getSelectedItem();
+      dropoffMonth = (String) doMonthJCB.getSelectedItem();
+      dropoffYear = (Integer) doYearJCB.getSelectedItem();
+      
+      switch (pickupMonth) {
+        case "January" :
+          pickupNum = 1;
+          break;
+        case "February" :
+          pickupNum = 2;
+          break;
+        case "March" :
+          pickupNum = 3;
+          break;
+        case "April" :
+          pickupNum = 4;
+          break;
+        case "May" :
+          pickupNum = 5;
+          break;
+        case "June" :
+          pickupNum = 6;
+          break;
+        case "July" :
+          pickupNum = 7;
+          break;
+        case "August" :
+          pickupNum = 8;
+          break;
+        case "September" :
+          pickupNum = 9;
+          break;
+        case "October" :
+          pickupNum = 10;
+          break;
+        case "November" :
+          pickupNum = 11;
+          break;
+        case "December" :
+          pickupNum = 12;
+          break;
+      }
+      
+      switch (dropoffMonth) {
+        case "January" :
+          dropoffNum = 1;
+          break;
+        case "February" :
+          dropoffNum = 2;
+          break;
+        case "March" :
+          dropoffNum = 3;
+          break;
+        case "April" :
+          dropoffNum = 4;
+          break;
+        case "May" :
+          dropoffNum = 5;
+          break;
+        case "June" :
+          dropoffNum = 6;
+          break;
+        case "July" :
+          dropoffNum = 7;
+          break;
+        case "August" :
+          dropoffNum = 8;
+          break;
+        case "September" :
+          dropoffNum = 9;
+          break;
+        case "October" :
+          dropoffNum = 10;
+          break;
+        case "November" :
+          dropoffNum = 11;
+          break;
+        case "December" :
+          dropoffNum = 12;
+          break;
+      }
+      
+      int numMonths = 0;
+      int numDays = 0;
+      
+      if (dropoffYear > pickupYear) {
+        numMonths = dropoffNum + (11 - pickupNum);
+        numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
+        System.out.println(numMonths);
+        return numDays;
+      }
+      else {
+        numMonths = dropoffNum - pickupNum - 1;
+        if (numMonths > 0) {
+          numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
+          return numDays;
+        }
+        numDays = (30 - pickupDay) + dropoffDay;
+        System.out.println(numMonths);
+        return numDays;
+      }
+    } else {
+      return 0;
+    }
+  }
   
+  public boolean checkRentalDays() {
+    
+    int pickupNum = 0;
+    int dropoffNum = 0;
+    
+    pickupDay = (Integer) puDayJCB.getSelectedItem();
+    pickupMonth = (String) puMonthJCB.getSelectedItem();
+    pickupYear = (Integer) puYearJCB.getSelectedItem();
+    dropoffDay = (Integer) doDayJCB.getSelectedItem();
+    dropoffMonth = (String) doMonthJCB.getSelectedItem();
+    dropoffYear = (Integer) doYearJCB.getSelectedItem();
+    
+    if (dropoffYear < pickupYear) {
+      card.show(cardPanel,  "p2");
+      JOptionPane.showMessageDialog(null, "Please enter a valid pick-up and drop-off date");
+      return false;
+    }
+    
+    switch (pickupMonth) {
+      case "January" :
+        pickupNum = 1;
+        break;
+      case "February" :
+        pickupNum = 2;
+        break;
+      case "March" :
+        pickupNum = 3;
+        break;
+      case "April" :
+        pickupNum = 4;
+        break;
+      case "May" :
+        pickupNum = 5;
+        break;
+      case "June" :
+        pickupNum = 6;
+        break;
+      case "July" :
+        pickupNum = 7;
+        break;
+      case "August" :
+        pickupNum = 8;
+        break;
+      case "September" :
+        pickupNum = 9;
+        break;
+      case "October" :
+        pickupNum = 10;
+        break;
+      case "November" :
+        pickupNum = 11;
+        break;
+      case "December" :
+        pickupNum = 12;
+        break;
+    }
+    
+    switch (dropoffMonth) {
+      case "January" :
+        dropoffNum = 1;
+        break;
+      case "February" :
+        dropoffNum = 2;
+        break;
+      case "March" :
+        dropoffNum = 3;
+        break;
+      case "April" :
+        dropoffNum = 4;
+        break;
+      case "May" :
+        dropoffNum = 5;
+        break;
+      case "June" :
+        dropoffNum = 6;
+        break;
+      case "July" :
+        dropoffNum = 7;
+        break;
+      case "August" :
+        dropoffNum = 8;
+        break;
+      case "September" :
+        dropoffNum = 9;
+        break;
+      case "October" :
+        dropoffNum = 10;
+        break;
+      case "November" :
+        dropoffNum = 11;
+        break;
+      case "December" :
+        dropoffNum = 12;
+        break;
+    }
+    
+    if (pickupNum > dropoffNum) {
+      card.show(cardPanel,  "p2");
+      JOptionPane.showMessageDialog(null, "Please enter a valid pick-up and drop-off date");
+      return false;
+    }
+    
+    if (pickupNum == dropoffNum) {
+      if (pickupDay > dropoffDay) {
+        card.show(cardPanel,  "p2");
+        JOptionPane.showMessageDialog(null, "Please enter a valid pick-up and drop-off date");
+        return false;
+      }
+    }
+    
+    
+    return true;
+  }
+  
+  public boolean checkCustomer() {
+    if (fNameText.getText().equals(" First Name ") || fNameText.getText().equals("")) {
+      card.show(cardPanel,  "p1");
+      fNameText.setText("**Required**");
+      fNameText.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (lNameText.getText().equals(" Last Name ") || lNameText.getText().equals("")) {
+      card.show(cardPanel,  "p1");
+      lNameText.setText("**Required**");
+      lNameText.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (addrText1.getText().equals(" House/Apt # & Street ") || addrText1.getText().equals("")) {
+      card.show(cardPanel,  "p1");
+      addrText1.setText("**Required**");
+      addrText1.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (addrText2.getText().equals(" City, State, Zip ") || addrText2.getText().equals("")) {
+      card.show(cardPanel,  "p1");
+      addrText2.setText("**Required**");
+      addrText2.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (emailText.getText().equals(" Email Address ") || emailText.getText().equals("")) {
+      card.show(cardPanel,  "p1");
+      emailText.setText("**Required**");
+      emailText.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (userText.getText().equals(" Username ") || userText.getText().equals("")) {
+      card.show(cardPanel,  "p1");
+      userText.setText("**Required**");
+      userText.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (passText.getText().equals(" Password ") || passText.getText().equals("")) {
+      card.show(cardPanel,  "p1");
+      passText.setText("**Required**");
+      passText.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else {
+      acctMade = true;
+      return true;
+    }
+  }
   
   
   
