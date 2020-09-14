@@ -38,7 +38,7 @@ public class RentalExpress {
   
   boolean acctMade = false;
   boolean carSelected = false;
-  
+  //
   private String whichCar = "";
   private int carPrice;
   private int totalPrice;
