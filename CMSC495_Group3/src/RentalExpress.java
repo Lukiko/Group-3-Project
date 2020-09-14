@@ -56,23 +56,23 @@ public class RentalExpress {
   
   JScrollPane carJSPanel = new JScrollPane(carPanel);
   
-  JPanel acctGrid1 = new JPanel();
-  JPanel acctGrid2 = new JPanel();
-  JPanel acctGrid3 = new JPanel();
-  JPanel acctGrid4 = new JPanel();
-  JPanel acctGrid5 = new JPanel();
-  JPanel acctGrid6 = new JPanel();
-  JPanel acctGrid7 = new JPanel();
-  JPanel acctGrid8 = new JPanel();
-  JPanel acctGrid9 = new JPanel();
-  JPanel acctGrid10 = new JPanel();
-  JPanel acctGrid11 = new JPanel();
-  JPanel acctGrid12 = new JPanel();
-  JPanel acctGrid13 = new JPanel();
-  JPanel acctGrid14 = new JPanel();
-  JPanel acctGrid15 = new JPanel();
-  JPanel acctGrid16 = new JPanel();
-  JPanel acctGrid17 = new JPanel();
+//  JPanel acctGrid1 = new JPanel();
+//  JPanel acctGrid2 = new JPanel();
+//  JPanel acctGrid3 = new JPanel();
+//  JPanel acctGrid4 = new JPanel();
+//  JPanel acctGrid5 = new JPanel();
+//  JPanel acctGrid6 = new JPanel();
+//  JPanel acctGrid7 = new JPanel();
+//  JPanel acctGrid8 = new JPanel();
+//  JPanel acctGrid9 = new JPanel();
+//  JPanel acctGrid10 = new JPanel();
+//  JPanel acctGrid11 = new JPanel();
+//  JPanel acctGrid12 = new JPanel();
+//  JPanel acctGrid13 = new JPanel();
+//  JPanel acctGrid14 = new JPanel();
+//  JPanel acctGrid15 = new JPanel();
+//  JPanel acctGrid16 = new JPanel();
+//  JPanel acctGrid17 = new JPanel();
   
   // Account panel items
   JButton accBtn = new JButton("<html><center>"+"Create Account / Log In"+"</html></center>");
@@ -82,14 +82,16 @@ public class RentalExpress {
   
   JButton regBtn = new JButton("Register Account");
   
-  JLabel fNameLabel = new JLabel("First Name: ", SwingConstants.CENTER);
-  JLabel lNameLabel = new JLabel("Last Name: ", SwingConstants.CENTER);
-  JLabel addressLabel = new JLabel("Address: ", SwingConstants.CENTER);
-  JLabel emailLabel = new JLabel("Email Address: ", SwingConstants.CENTER);
-  JLabel userLabel = new JLabel("Username: ", SwingConstants.CENTER);
-  JLabel passLabel = new JLabel("Password: ", SwingConstants.CENTER);
-  JLabel creditLabel = new JLabel("Credit Card # (No Spaces): ", SwingConstants.CENTER);
-  JLabel bdayLabel = new JLabel("Birthday: ", SwingConstants.CENTER);
+  JLabel fNameLabel = new JLabel("First name ", SwingConstants.LEFT);
+  JLabel lNameLabel = new JLabel("Last name ", SwingConstants.LEFT);
+  JLabel addressLabel = new JLabel("Address ", SwingConstants.LEFT);
+  JLabel emailLabel = new JLabel("Email address ", SwingConstants.LEFT);
+  JLabel userLabel = new JLabel("Username ", SwingConstants.LEFT);
+  JLabel passLabel = new JLabel("Password ", SwingConstants.LEFT);
+  JLabel creditLabel = new JLabel("Credit Card # (No Spaces): ", SwingConstants.LEFT);
+  JLabel bdayLabel = new JLabel("Birthday ", SwingConstants.LEFT);
+  JLabel cityLabel = new JLabel("City", SwingConstants.LEFT);
+  JLabel stateLabel = new JLabel("State", SwingConstants.LEFT);
   
   String[] bMJCB = {"January", "February", "March", "April", "May", "June", "July", "August", 
       "September", "October", "November", "December"};
@@ -108,19 +110,28 @@ public class RentalExpress {
       1900};
   JComboBox birthYearJCB = new JComboBox(bYJCB);
   
-  JTextField fNameText = new JTextField(" First Name ");
-  JTextField lNameText = new JTextField(" Last Name ");
-  JTextField addrText1 = new JTextField(" House/Apt # & Street ");
-  JTextField addrText2 = new JTextField(" City, State, Zip ");
-  JTextField emailText = new JTextField(" Email Address ");
-  JTextField userText = new JTextField(" Username ");
-  JTextField passText = new JTextField(" Password ");
+  JTextField fNameText = new JTextField("");
+  JTextField lNameText = new JTextField("");
+  JTextField addrText1 = new JTextField("");
+  JTextField addrText2 = new JTextField("");
+  JTextField emailText = new JTextField("");
+  JTextField userText = new JTextField("");
+  JTextField passText = new JTextField("");
+  JTextField cityText = new JTextField("");
   
   // location & car panel items
   JLabel pickUpLocLabel = new JLabel("Pick-Up Location: ", SwingConstants.CENTER);
   JLabel dropOffLocLabel = new JLabel("Drop-Off Location: ", SwingConstants.CENTER);
   JLabel dropOffDayLabel = new JLabel("Drop-Off Date: ");
   JLabel pickUpDayLabel = new JLabel("Pick-Up Date: ");
+  
+  String[] stJCB = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", 
+      "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", 
+      "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
+      "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", 
+      "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", 
+      "West Virginia", "Wisconsin", "Wyoming"};
+  JComboBox stateJCB = new JComboBox(stJCB);
   
   String[] puJCB = {"Alexandria, VA", "Centreville, VA", "Chantilly, VA", "Culpeper, VA", "Falls Church, VA", "Fairfax, VA"};
   String[] doJCB = {"Alexandria, VA", "Centreville, VA", "Chantilly, VA", "Culpeper, VA", "Falls Church, VA", "Fairfax, VA"};
@@ -179,72 +190,112 @@ public class RentalExpress {
     cardPanel.add(carJSPanel, "p3");
     cardPanel.add(finalPanel, "p4");
     
-    // Account panel
-    fNameText.setHorizontalAlignment(JTextField.CENTER);
-    lNameText.setHorizontalAlignment(JTextField.CENTER);
-    addrText1.setHorizontalAlignment(JTextField.CENTER);
-    addrText2.setHorizontalAlignment(JTextField.CENTER);
-    emailText.setHorizontalAlignment(JTextField.CENTER);
-    userText.setHorizontalAlignment(JTextField.CENTER);
-    passText.setHorizontalAlignment(JTextField.CENTER);
+    // ----------------   Account panel
+//    fNameText.setHorizontalAlignment(JTextField.CENTER);
+//    lNameText.setHorizontalAlignment(JTextField.CENTER);
+//    addrText1.setHorizontalAlignment(JTextField.CENTER);
+//    addrText2.setHorizontalAlignment(JTextField.CENTER);
+//    emailText.setHorizontalAlignment(JTextField.CENTER);
+//    userText.setHorizontalAlignment(JTextField.CENTER);
+//    passText.setHorizontalAlignment(JTextField.CENTER);
+    
+    
+    acctPanel.setLayout(null);
+    
+    fNameLabel.setBounds(90, 50, 80, 50);
+    fNameLabel.setHorizontalAlignment(JLabel.LEFT);
+    acctPanel.add(fNameLabel);
+    
+    fNameText.setBounds(90, 90, 190, 30);
+    acctPanel.add(fNameText);
+    
+    lNameLabel.setBounds(320, 50, 80, 50);
+    lNameLabel.setHorizontalAlignment(JLabel.LEFT);
+    acctPanel.add(lNameLabel);
+    
+    lNameText.setBounds(320, 90, 190, 30);
+    acctPanel.add(lNameText);
+    
+    addressLabel.setBounds(90, 110, 80, 50);
+    addressLabel.setHorizontalAlignment(JLabel.LEFT);
+    acctPanel.add(addressLabel);
+    
+    addrText1.setBounds(90, 150, 420, 30);
+    acctPanel.add(addrText1);
+    
+    cityLabel.setBounds(90, 170, 80, 50);
+    acctPanel.add(cityLabel);
+    
+    cityText.setBounds(90, 210, 190, 30);
+    acctPanel.add(cityText);
+    
+    stateLabel.setBounds(320, 170, 80, 50);
+    acctPanel.add(stateLabel);
+    
+    stateJCB.setBounds(320, 210, 190, 30);
+    acctPanel.add(stateJCB);
+    
+    //lNameLabel.setBounds(r);
     
     regBtn.setFocusPainted(false);
     
-    acctPanel.setLayout(new GridLayout(18, 1));
-    acctPanel.add(acctGrid1);
-    acctGrid1.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid2);
-    acctGrid2.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid3);
-    acctGrid3.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid4);
-    acctGrid4.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid5);
-    acctGrid5.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid6);
-    acctGrid6.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid7);
-    acctGrid7.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid8);
-    acctGrid8.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid9);
-    acctGrid9.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid10);
-    acctGrid10.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid11);
-    acctGrid11.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid12);
-    acctGrid12.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid13);
-    acctGrid13.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid14);
-    acctGrid14.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid15);
-    acctGrid15.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid16);
-    acctGrid16.setLayout(new GridLayout(1, 4));
-    acctPanel.add(acctGrid17);
-    acctGrid17.setLayout(new GridLayout(1, 2));
     
-    acctGrid1.add(fNameLabel);
-    acctGrid1.add(fNameText);
-    acctGrid1.add(lNameLabel);
-    acctGrid1.add(lNameText);
-    acctGrid3.add(addressLabel);
-    addressLabel.setHorizontalAlignment(JLabel.LEFT);
-    acctGrid4.add(addrText1);
-    acctGrid5.add(addrText2);
-    acctGrid7.add(emailLabel);
-    acctGrid7.add(emailText);
-    acctGrid8.add(userLabel);
-    acctGrid8.add(userText);
-    acctGrid9.add(passLabel);
-    acctGrid9.add(passText);
-    acctGrid11.add(bdayLabel);
-    acctGrid11.add(birthMonthJCB);
-    acctGrid11.add(birthDayJCB);
-    acctGrid11.add(birthYearJCB);
-    acctGrid17.add(regBtn);
+    
+//    acctPanel.setLayout(new GridLayout(18, 1));
+//    acctPanel.add(acctGrid1);
+//    acctGrid1.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid2);
+//    acctGrid2.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid3);
+//    acctGrid3.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid4);
+//    acctGrid4.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid5);
+//    acctGrid5.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid6);
+//    acctGrid6.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid7);
+//    acctGrid7.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid8);
+//    acctGrid8.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid9);
+//    acctGrid9.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid10);
+//    acctGrid10.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid11);
+//    acctGrid11.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid12);
+//    acctGrid12.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid13);
+//    acctGrid13.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid14);
+//    acctGrid14.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid15);
+//    acctGrid15.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid16);
+//    acctGrid16.setLayout(new GridLayout(1, 4));
+//    acctPanel.add(acctGrid17);
+//    acctGrid17.setLayout(new GridLayout(1, 2));
+//    
+//    acctGrid1.add(fNameLabel);
+//    acctGrid1.add(fNameText);
+//    acctGrid1.add(lNameLabel);
+//    acctGrid1.add(lNameText);
+//    acctGrid3.add(addressLabel);
+//    addressLabel.setHorizontalAlignment(JLabel.LEFT);
+//    acctGrid4.add(addrText1);
+//    acctGrid5.add(addrText2);
+//    acctGrid7.add(emailLabel);
+//    acctGrid7.add(emailText);
+//    acctGrid8.add(userLabel);
+//    acctGrid8.add(userText);
+//    acctGrid9.add(passLabel);
+//    acctGrid9.add(passText);
+//    acctGrid11.add(bdayLabel);
+//    acctGrid11.add(birthMonthJCB);
+//    acctGrid11.add(birthDayJCB);
+//    acctGrid11.add(birthYearJCB);
+//    acctGrid17.add(regBtn);
     
     // Pick-Up Drop-Off Panel
     pickupPanel.setLayout(null);
