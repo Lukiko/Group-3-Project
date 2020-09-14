@@ -867,47 +867,44 @@ public class RentalExpress {
         day = (Integer) birthDayJCB.getSelectedItem();
         year = (Integer) birthYearJCB.getSelectedItem();
         
+        boolean userExists = false;
+        
         try {
           Connection myConn = DriverManager.getConnection(url, userdb, passdb);
           Statement insertStmt = myConn.createStatement();
           
-          String sql = "insert into customers "
-              + "(last_name, first_name, email, street, city, state, birth_month, birth_day, birth_year, username, password) "
-              + "values ('" + lName + "', '" + fName + "', '" + email + "', '" + addr1 + "', '" 
-              + city + "', '" + state + "', '" + month + "', '" + day + "', '" + year + "', '" 
-              + user + "', '" + pass + "')";
+          PreparedStatement st = myConn.prepareStatement("SELECT * FROM customers");
+          ResultSet rs = st.executeQuery();
           
-          insertStmt.executeUpdate(sql);
+          String loginUser = userText.getText();
           
-          
-        }
+          while (rs.next()) {
+            String userName = rs.getString("username");
+            if (loginUser.equalsIgnoreCase(userName)) {
+              userExists = true;
+              JOptionPane.showMessageDialog(null, "Username Already Exists");
+            }
+          }  
+          if (!userExists) {
+            String sql = "insert into customers "
+                + "(last_name, first_name, email, street, city, state, birth_month, birth_day, birth_year, username, password) "
+                + "values ('" + lName + "', '" + fName + "', '" + email + "', '" + addr1 + "', '" 
+                + city + "', '" + state + "', '" + month + "', '" + day + "', '" + year + "', '" 
+                + user + "', '" + pass + "')";
+            
+            insertStmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "<html><center>Account Created Successfully!<br>"
+                + "You May Now Log In</center></html>");
+            card.show(cardPanel, "p1");
+          }
+        }  
         catch (Exception e) {
           e.printStackTrace();
           JOptionPane.showMessageDialog(null, "Insert Failed");
         }
-        
-        
-        
-//        c.setFirstName(fName);
-//        c.setLastName(lName);
-//        c.setAddress1(addr1);
-//        c.setAddress2(addr2);
-//        c.setEmail(email);
-//        c.setUsername(user);
-//        c.setPassword(pass);
-//        c.setMonth(month);
-//        c.setDay(day);
-//        c.setYear(year);
-        JOptionPane.showMessageDialog(null, "<html><center>Account Created Successfully!<br>"
-            + "You May Now Log In</center></html>");
-        
-        card.show(cardPanel, "p1");
-        
-        }
-        
+        }  
       }
     });
-    
     
     frame.add(sp);
     frame.setVisible(true);
