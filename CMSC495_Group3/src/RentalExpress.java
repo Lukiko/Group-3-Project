@@ -8,6 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -26,9 +28,11 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import java.sql.*;
+
 public class RentalExpress {
   
-  private String fName, lName, addr1, addr2, email, user, pass, month;
+  private String fName, lName, addr1, addr2, email, user, pass, month, city, state;
   private int day, year;
   
   private String pickupLoc, pickupMonth, dropoffLoc, dropoffMonth;
@@ -149,6 +153,12 @@ public class RentalExpress {
   JSplitPane sp = new JSplitPane(SwingConstants.VERTICAL, buttonPanel, cardPanel);
   
   CardLayout card = new CardLayout();
+  
+  String url = "jdbc:mysql://localhost:3306/testdb";
+  String userdb = "testuser";
+  String passdb = "testpass";
+  
+  
   
   public RentalExpress() {
     
@@ -785,6 +795,60 @@ public class RentalExpress {
       }
     });
     
+    loginBtn.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent arg0) {
+        
+        try {
+          
+          String loginUser = loginUserText.getText();
+          String loginPass = loginPassText.getText();
+          
+          Connection myConn = DriverManager.getConnection(url, userdb, passdb);
+          
+          PreparedStatement st = myConn.prepareStatement("SELECT * FROM customers");
+          
+          ResultSet rs = st.executeQuery();
+          
+          while (rs.next()) {
+            String userName = rs.getString("username");
+            if (loginUser.equalsIgnoreCase(userName)) {
+              String password = rs.getString("password");
+              if (loginPass.equals(password)) {
+                JOptionPane.showMessageDialog(null, "Login Successful!");
+                
+                st = myConn.prepareStatement("SELECT * FROM customers WHERE username = '" + userName + "'");
+                
+                fName = rs.getString("first_name");
+                lName = rs.getString("last_name");
+                email = rs.getString("email");
+                user = rs.getString("username");
+                addr1 = rs.getString("street");
+                city = rs.getString("city");
+                state = rs.getString("state");
+                month = rs.getString("birth_month");
+                day = rs.getInt("birth_day");
+                year = rs.getInt("birth_year");
+                
+                System.out.println(fName);
+                
+              }
+              else {
+                JOptionPane.showMessageDialog(null, "Wrong Password");
+              }
+            }
+          }
+
+          
+          
+        }
+        catch (Exception e) {
+          e.printStackTrace();
+          JOptionPane.showMessageDialog(null, "Insert Failed");
+        }
+        
+      }
+    });
+    
     regBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         
@@ -797,22 +861,47 @@ public class RentalExpress {
         email = emailText.getText();
         user = userText.getText();
         pass = passText.getText();
+        city = cityText.getText();
+        state = (String) stateJCB.getSelectedItem();
         month = (String) birthMonthJCB.getSelectedItem();
         day = (Integer) birthDayJCB.getSelectedItem();
         year = (Integer) birthYearJCB.getSelectedItem();
         
-        c.setFirstName(fName);
-        c.setLastName(lName);
-        c.setAddress1(addr1);
-        c.setAddress2(addr2);
-        c.setEmail(email);
-        c.setUsername(user);
-        c.setPassword(pass);
-        c.setMonth(month);
-        c.setDay(day);
-        c.setYear(year);
+        try {
+          Connection myConn = DriverManager.getConnection(url, userdb, passdb);
+          Statement insertStmt = myConn.createStatement();
+          
+          String sql = "insert into customers "
+              + "(last_name, first_name, email, street, city, state, birth_month, birth_day, birth_year, username, password) "
+              + "values ('" + lName + "', '" + fName + "', '" + email + "', '" + addr1 + "', '" 
+              + city + "', '" + state + "', '" + month + "', '" + day + "', '" + year + "', '" 
+              + user + "', '" + pass + "')";
+          
+          insertStmt.executeUpdate(sql);
+          
+          
+        }
+        catch (Exception e) {
+          e.printStackTrace();
+          JOptionPane.showMessageDialog(null, "Insert Failed");
+        }
         
-        card.show(cardPanel, "p2");
+        
+        
+//        c.setFirstName(fName);
+//        c.setLastName(lName);
+//        c.setAddress1(addr1);
+//        c.setAddress2(addr2);
+//        c.setEmail(email);
+//        c.setUsername(user);
+//        c.setPassword(pass);
+//        c.setMonth(month);
+//        c.setDay(day);
+//        c.setYear(year);
+        JOptionPane.showMessageDialog(null, "<html><center>Account Created Successfully!<br>"
+            + "You May Now Log In</center></html>");
+        
+        card.show(cardPanel, "p1");
         
         }
         
@@ -1099,13 +1188,13 @@ public class RentalExpress {
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
-    else if (addrText2.getText().equals(" City, State, Zip ") || addrText2.getText().equals("")) {
-      card.show(cardPanel,  "p5");
-      addrText2.setText("**Required**");
-      addrText2.setForeground(Color.RED);
-      JOptionPane.showMessageDialog(null, "Please complete all fields");
-      return false;
-    }
+//    else if (addrText2.getText().equals(" City, State, Zip ") || addrText2.getText().equals("")) {
+//      card.show(cardPanel,  "p5");
+//      addrText2.setText("**Required**");
+//      addrText2.setForeground(Color.RED);
+//      JOptionPane.showMessageDialog(null, "Please complete all fields");
+//      return false;
+//    }
     else if (emailText.getText().equals(" Email Address ") || emailText.getText().equals("")) {
       card.show(cardPanel,  "p5");
       emailText.setText("**Required**");
