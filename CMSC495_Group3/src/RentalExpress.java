@@ -38,6 +38,7 @@ public class RentalExpress {
 
   Customer c = new Customer();
   
+  boolean hasLoggedIn = false;
   boolean acctMade = false;
   boolean carSelected = false;
   
@@ -540,9 +541,9 @@ public class RentalExpress {
         totalPrice = 0;
         
         if (carSelected) {
-          if (acctMade) {
+          if (hasLoggedIn) {
 
-            checkCustomer();
+            //checkCustomer();
 
             numRentalDays = getRentalDays();
             
@@ -580,8 +581,8 @@ public class RentalExpress {
             jt.append("Total: $" + (salesTax + totalPrice));
             
           } else {
-            card.show(cardPanel,  "p5");
-            JOptionPane.showMessageDialog(null, "Please create a customer account");
+            card.show(cardPanel,  "p1");
+            JOptionPane.showMessageDialog(null, "Please log in before checking out");
           }
         } else {
           card.show(cardPanel,  "p3");
@@ -830,6 +831,7 @@ public class RentalExpress {
               String password = rs.getString("password");
               loginExist = true;
               if (loginPass.equals(password)) {
+                
                 JOptionPane.showMessageDialog(null, "Login Successful!");
                 
                 st = myConn.prepareStatement("SELECT * FROM customers WHERE username = '" + userName + "'");
@@ -844,6 +846,8 @@ public class RentalExpress {
                 month = rs.getString("birth_month");
                 day = rs.getInt("birth_day");
                 year = rs.getInt("birth_year");
+                
+                hasLoggedIn = true;
               }
               else {
                 JOptionPane.showMessageDialog(null, "Wrong Password");
