@@ -335,7 +335,7 @@ public class RentalExpress {
     carPanel.setBorder(padding);
     carJSPanel.getVerticalScrollBar().setUnitIncrement(15);
     
-    ImageIcon hellcat = new ImageIcon("src/resources/hellcat.jpg");
+    ImageIcon hellcat = new ImageIcon("resources/hellcat.jpg");
     JToggleButton hellcatBtn = new JToggleButton("<html><center>2017 Dodge Challenger Hellcat<br> $158/day </center></html>", hellcat);
     hellcatBtn.setRolloverEnabled(true);
 //    hellcatBtn.setBounds(10, 10, 220, 210);
@@ -345,7 +345,7 @@ public class RentalExpress {
     hellcatBtn.setFocusPainted(false);
     carPanel.add(hellcatBtn);
     
-    ImageIcon camrytrd = new ImageIcon("src/resources/camrytrd.jpg");
+    ImageIcon camrytrd = new ImageIcon("resources/camrytrd.jpg");
     JToggleButton camryTRDBtn = new JToggleButton("<html><center>2020 Toyota Camry TRD<br> $96/day </center></html>", camrytrd);
     camryTRDBtn.setRolloverEnabled(true);
 //    camryTRDBtn.setBounds(240, 10, 220, 210);
@@ -359,7 +359,7 @@ public class RentalExpress {
     });
     carPanel.add(camryTRDBtn);
     
-    ImageIcon corvette = new ImageIcon("src/resources/corvette.jpg");
+    ImageIcon corvette = new ImageIcon("resources/corvette.jpg");
     JToggleButton corvetteBtn = new JToggleButton("<html><center>2020 Chevrolet Corvette<br> $135/day </center></html>", corvette);
     corvetteBtn.setRolloverEnabled(true);
 //    corvetteBtn.setBounds(470, 10, 220, 210);
@@ -369,7 +369,7 @@ public class RentalExpress {
     corvetteBtn.setFocusPainted(false);
     carPanel.add(corvetteBtn);
     
-    ImageIcon jeep = new ImageIcon("src/resources/jeep.jpg");
+    ImageIcon jeep = new ImageIcon("resources/jeep.jpg");
     JToggleButton jeepBtn = new JToggleButton("<html><center>2020 Jeep Wrangler<br> $85/day </center></html>", jeep);
     jeepBtn.setRolloverEnabled(true);
 //    jeepBtn.setBounds(10, 230, 220, 210);
@@ -379,7 +379,7 @@ public class RentalExpress {
     jeepBtn.setFocusPainted(false);
     carPanel.add(jeepBtn);
     
-    ImageIcon f150 = new ImageIcon("src/resources/f150.jpg");
+    ImageIcon f150 = new ImageIcon("resources/f150.jpg");
     JToggleButton f150Btn = new JToggleButton("<html><center>2020 Ford F-150<br> $92/day </center></html>", f150);
     f150Btn.setRolloverEnabled(true);
 //    f150Btn.setBounds(240, 230, 220, 210);
@@ -389,7 +389,7 @@ public class RentalExpress {
     f150Btn.setFocusPainted(false);
     carPanel.add(f150Btn);
     
-    ImageIcon crv = new ImageIcon("src/resources/crv.jpg");
+    ImageIcon crv = new ImageIcon("resources/crv.jpg");
     JToggleButton crvBtn = new JToggleButton("<html><center>2020 Honda CRV<br> $73/day </center></html>", crv);
     crvBtn.setRolloverEnabled(true);
 //    crvBtn.setBounds(470, 230, 220, 210);
@@ -399,7 +399,7 @@ public class RentalExpress {
     crvBtn.setFocusPainted(false);
     carPanel.add(crvBtn);
     
-    ImageIcon typeR = new ImageIcon("src/resources/typer.jpg");
+    ImageIcon typeR = new ImageIcon("resources/typer.jpg");
     JToggleButton typeRBtn = new JToggleButton("<html><center>2020 Honda Civic Type R<br> $104/day </center></html>", typeR);
     typeRBtn.setRolloverEnabled(true);
 //    typeRBtn.setBounds(10, 460, 220, 210);
@@ -409,7 +409,7 @@ public class RentalExpress {
     typeRBtn.setFocusPainted(false);
     carPanel.add(typeRBtn);
     
-    ImageIcon camry = new ImageIcon("src/resources/camry.jpg");
+    ImageIcon camry = new ImageIcon("resources/camry.jpg");
     JToggleButton camryBtn = new JToggleButton("<html><center>2020 Toyota Camry<br> $72/day </center></html>", camry);
     camryBtn.setRolloverEnabled(true);
 //    camryBtn.setBounds(10, 460, 220, 210);
@@ -419,7 +419,7 @@ public class RentalExpress {
     camryBtn.setFocusPainted(false);
     carPanel.add(camryBtn);
     
-    ImageIcon corolla = new ImageIcon("src/resources/corolla.jpg");
+    ImageIcon corolla = new ImageIcon("resources/corolla.jpg");
     JToggleButton corollaBtn = new JToggleButton("<html><center>2020 Toyota Corolla<br> $57/day </center></html>", corolla);
     corollaBtn.setRolloverEnabled(true);
 //    corollaBtn.setBounds(10, 460, 220, 210);
@@ -429,7 +429,7 @@ public class RentalExpress {
     corollaBtn.setFocusPainted(false);
     carPanel.add(corollaBtn);
     
-    ImageIcon elantra = new ImageIcon("src/resources/elantra.jpg");
+    ImageIcon elantra = new ImageIcon("resources/elantra.jpg");
     JToggleButton elantraBtn = new JToggleButton("<html><center>2020 Hyundai Elantra <br> $52/day </center></html>", elantra);
     elantraBtn.setRolloverEnabled(true);
 //    elantraBtn.setBounds(10, 460, 220, 210);
@@ -439,7 +439,7 @@ public class RentalExpress {
     elantraBtn.setFocusPainted(false);
     carPanel.add(elantraBtn);
     
-    ImageIcon explorer = new ImageIcon("src/resources/explorer.jpg");
+    ImageIcon explorer = new ImageIcon("resources/explorer.jpg");
     JToggleButton explorerBtn = new JToggleButton("<html><center>2020 Ford Explorer <br> $85/day </center></html>", explorer);
     explorerBtn.setRolloverEnabled(true);
 //    explorerBtn.setBounds(10, 460, 220, 210);
@@ -449,7 +449,7 @@ public class RentalExpress {
     explorerBtn.setFocusPainted(false);
     carPanel.add(explorerBtn);
     
-    ImageIcon mazda3 = new ImageIcon("src/resources/mazda3.jpg");
+    ImageIcon mazda3 = new ImageIcon("resources/mazda3.jpg");
     JToggleButton mazda3Btn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", mazda3);
     mazda3Btn.setRolloverEnabled(true);
 //    mazda3Btn.setBounds(10, 460, 220, 210);
@@ -459,7 +459,7 @@ public class RentalExpress {
     mazda3Btn.setFocusPainted(false);
     carPanel.add(mazda3Btn);
     
-    ImageIcon highlander = new ImageIcon("src/resources/highlander.jpg");
+    ImageIcon highlander = new ImageIcon("resources/highlander.jpg");
     JToggleButton highlanderBtn = new JToggleButton("<html><center>2020 Toyota Highaldner <br> $82/day </center></html>", highlander);
     highlanderBtn.setRolloverEnabled(true);
 //    highlanderBtn.setBounds(10, 460, 220, 210);
@@ -469,7 +469,7 @@ public class RentalExpress {
     highlanderBtn.setFocusPainted(false);
     carPanel.add(highlanderBtn);
     
-    ImageIcon supra = new ImageIcon("src/resources/supra.jpg");
+    ImageIcon supra = new ImageIcon("resources/supra.jpg");
     JToggleButton supraBtn = new JToggleButton("<html><center>2020 Toyota Supra <br> $74/day </center></html>", supra);
     supraBtn.setRolloverEnabled(true);
 //    supraBtn.setBounds(10, 460, 220, 210);
@@ -479,7 +479,7 @@ public class RentalExpress {
     supraBtn.setFocusPainted(false);
     carPanel.add(supraBtn);
     
-    ImageIcon wrx = new ImageIcon("src/resources/wrx.jpg");
+    ImageIcon wrx = new ImageIcon("resources/wrx.jpg");
     JToggleButton wrxBtn = new JToggleButton("<html><center>2020 Subaru WRX <br> $97/day </center></html>", wrx);
     wrxBtn.setRolloverEnabled(true);
 //    wrxBtn.setBounds(10, 460, 220, 210);
