@@ -847,6 +847,15 @@ public class RentalExpress {
                 day = rs.getInt("birth_day");
                 year = rs.getInt("birth_year");
                 
+                c.setFirstName(fName);
+                c.setLastName(lName);
+                c.setEmail(email);
+                c.setUsername(user);
+                c.setAddress1(addr1);
+                c.setMonth(month);
+                c.setDay(day);
+                c.setYear(year);
+                
                 hasLoggedIn = true;
               }
               else {
