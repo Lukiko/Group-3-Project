@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
@@ -30,14 +31,15 @@ import java.sql.*;
 
 public class RentalExpress {
   
+  // Variables for registration panel
   private String fName, lName, addr1, addr2, email, user, pass, month, city, state;
   private int day, year;
   
+  // Variables for pickup and dropoff panel
   private String pickupLoc, pickupMonth, dropoffLoc, dropoffMonth;
   private int pickupDay, pickupYear, dropoffDay, dropoffYear;
-
-  Customer c = new Customer();
   
+  // Variables used in checkout algorithms
   boolean hasLoggedIn = false;
   boolean acctMade = false;
   boolean carSelected = false;
@@ -47,6 +49,7 @@ public class RentalExpress {
   private int totalPrice;
   private int numRentalDays;
   
+  // Creating main JFrame and JPanels
   JFrame frame = new JFrame("Rental Express");
   
   JPanel buttonPanel = new JPanel();
@@ -71,6 +74,7 @@ public class RentalExpress {
   JButton loginBtn = new JButton("Log In");
   JButton regPageBtn = new JButton("Sign Up");
   
+  // Items for Registration panel
   JLabel fNameLabel = new JLabel("First name ", SwingConstants.LEFT);
   JLabel lNameLabel = new JLabel("Last name ", SwingConstants.LEFT);
   JLabel addressLabel = new JLabel("Address ", SwingConstants.LEFT);
@@ -100,24 +104,6 @@ public class RentalExpress {
       1915, 1914, 1913, 1912, 1911, 1910, 1909, 1908, 1907, 1906, 1905, 1904, 1903, 1902, 1901,
       1900};
   JComboBox birthYearJCB = new JComboBox(bYJCB);
-  
-  JTextField fNameText = new JTextField("");
-  JTextField lNameText = new JTextField("");
-  JTextField addrText1 = new JTextField("");
-  JTextField addrText2 = new JTextField("");
-  JTextField emailText = new JTextField("");
-  JTextField userText = new JTextField("");
-  JTextField passText = new JTextField("");
-  JTextField cityText = new JTextField("");
-  JTextField loginUserText = new JTextField("");
-  JTextField loginPassText = new JTextField("");
-  
-  // location & car panel items
-  JLabel pickUpLocLabel = new JLabel("Pick-Up Location: ", SwingConstants.CENTER);
-  JLabel dropOffLocLabel = new JLabel("Drop-Off Location: ", SwingConstants.CENTER);
-  JLabel dropOffDayLabel = new JLabel("Drop-Off Date: ");
-  JLabel pickUpDayLabel = new JLabel("Pick-Up Date: ");
-  
   String[] stJCB = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", 
       "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", 
       "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
@@ -125,6 +111,23 @@ public class RentalExpress {
       "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", 
       "West Virginia", "Wisconsin", "Wyoming"};
   JComboBox stateJCB = new JComboBox(stJCB);
+  
+  JTextField fNameText = new JTextField("");
+  JTextField lNameText = new JTextField("");
+  JTextField addrText1 = new JTextField("");
+  JTextField addrText2 = new JTextField("");
+  JTextField emailText = new JTextField("");
+  JTextField userText = new JTextField("");
+  JPasswordField passText = new JPasswordField("");
+  JTextField cityText = new JTextField("");
+  JTextField loginUserText = new JTextField("");
+  JPasswordField loginPassText = new JPasswordField("");
+  
+  // Items for Pickup and Dropoff Panel
+  JLabel pickUpLocLabel = new JLabel("Pick-Up Location: ", SwingConstants.CENTER);
+  JLabel dropOffLocLabel = new JLabel("Drop-Off Location: ", SwingConstants.CENTER);
+  JLabel dropOffDayLabel = new JLabel("Drop-Off Date: ");
+  JLabel pickUpDayLabel = new JLabel("Pick-Up Date: ");
   
   String[] puJCB = {"Alexandria, VA", "Centreville, VA", "Chantilly, VA", "Culpeper, VA", "Falls Church, VA", "Fairfax, VA"};
   String[] doJCB = {"Alexandria, VA", "Centreville, VA", "Chantilly, VA", "Culpeper, VA", "Falls Church, VA", "Fairfax, VA"};
@@ -149,18 +152,19 @@ public class RentalExpress {
   JComboBox puDayJCB = new JComboBox(puDJCB);
   JComboBox puMonthJCB = new JComboBox(puMJCB); 
   
+  // Creating a few necessary objects
   JSplitPane sp = new JSplitPane(SwingConstants.VERTICAL, buttonPanel, cardPanel);
-  
   CardLayout card = new CardLayout();
+  Customer c = new Customer();
   
+  // Setting variables to connect to AWS MySQL database
   String url = "jdbc:mysql://testdb.c4cpuhdl2knb.us-east-1.rds.amazonaws.com:3306/testdb";
   String userdb = "testuser";
   String passdb = "testpass";
   
-  
-  
   public RentalExpress() {
     
+    // Adding main JPanels to CardLayout
     frame.setSize(900, 600);
     frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
@@ -185,7 +189,7 @@ public class RentalExpress {
     cardPanel.add(finalPanel, "p4");
     cardPanel.add(acctPanel, "p5");
     
-    // --------------------------- Home Panel
+    // --------------------------- Login and Sign Up Panel
     
     loginPanel.setLayout(null);
     
@@ -199,6 +203,7 @@ public class RentalExpress {
     loginPanel.add(loginPassLabel);
     
     loginPassText.setBounds(250, 240, 180, 35);
+    loginPassText.setEchoChar('*');
     loginPanel.add(loginPassText);
     
     loginBtn.setBounds(250, 300, 180, 45);
@@ -207,7 +212,7 @@ public class RentalExpress {
     regPageBtn.setBounds(250, 370, 180, 45);
     loginPanel.add(regPageBtn);
     
-    // --------------------------- Account panel
+    // --------------------------- Registration Panel
     
     acctPanel.setLayout(null);
     
@@ -272,6 +277,7 @@ public class RentalExpress {
     acctPanel.add(passLabel);
     
     passText.setBounds(360, 420, 190, 30);
+    passText.setEchoChar('*');
     acctPanel.add(passText);
     
     regBtn.setFocusPainted(false);
@@ -282,7 +288,7 @@ public class RentalExpress {
     loginPageBtn.setBounds(360, 480, 140, 65);
     acctPanel.add(loginPageBtn);
     
-    //---------------------------- Pick Up
+    //---------------------------- Pick Up and Drop Off Panel
     
     pickupPanel.setLayout(null);
     
@@ -303,8 +309,6 @@ public class RentalExpress {
     
     pickUpJCB.setBounds(160, 115, 165, 35);
     pickupPanel.add(pickUpJCB);
-    
-    //---------------------------- Drop Off
     
     dropOffDayLabel.setBounds(66, 205, 85, 50);
     pickupPanel.add(dropOffDayLabel);
@@ -334,11 +338,9 @@ public class RentalExpress {
     carPanel.setBorder(padding);
     carJSPanel.getVerticalScrollBar().setUnitIncrement(15);
     
-//    ImageIcon hellcat = new ImageIcon("images/hellcat.jpg");
     ImageIcon hellcat = new javax.swing.ImageIcon(getClass().getResource("Hellcat.jpg"));
     JToggleButton hellcatBtn = new JToggleButton("<html><center>2017 Dodge Challenger Hellcat<br> $158/day </center></html>", hellcat);
     hellcatBtn.setRolloverEnabled(true);
-//    hellcatBtn.setBounds(10, 10, 220, 210);
     hellcatBtn.setBackground(Color.WHITE);
     hellcatBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     hellcatBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -346,25 +348,16 @@ public class RentalExpress {
     carPanel.add(hellcatBtn);
     
     ImageIcon camrytrd = new javax.swing.ImageIcon(getClass().getResource("camrytrd.jpg"));
-//    ImageIcon camrytrd = new ImageIcon("images/camrytrd.jpg");
     JToggleButton camryTRDBtn = new JToggleButton("<html><center>2020 Toyota Camry TRD<br> $96/day </center></html>", camrytrd);
     camryTRDBtn.setRolloverEnabled(true);
-//    camryTRDBtn.setBounds(240, 10, 220, 210);
     camryTRDBtn.setBackground(Color.WHITE);
     camryTRDBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     camryTRDBtn.setHorizontalTextPosition(SwingConstants.CENTER);
     camryTRDBtn.setFocusPainted(false);
-    camryTRDBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-      }
-    });
-    carPanel.add(camryTRDBtn);
     
     ImageIcon corvette = new javax.swing.ImageIcon(getClass().getResource("corvette.jpg"));
-//    ImageIcon corvette = new ImageIcon("images/corvette.jpg");
     JToggleButton corvetteBtn = new JToggleButton("<html><center>2020 Chevrolet Corvette<br> $135/day </center></html>", corvette);
     corvetteBtn.setRolloverEnabled(true);
-//    corvetteBtn.setBounds(470, 10, 220, 210);
     corvetteBtn.setBackground(Color.WHITE);
     corvetteBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     corvetteBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -372,10 +365,8 @@ public class RentalExpress {
     carPanel.add(corvetteBtn);
     
     ImageIcon jeep = new javax.swing.ImageIcon(getClass().getResource("jeep.jpg"));
-//    ImageIcon jeep = new ImageIcon("images/jeep.jpg");
     JToggleButton jeepBtn = new JToggleButton("<html><center>2020 Jeep Wrangler<br> $85/day </center></html>", jeep);
     jeepBtn.setRolloverEnabled(true);
-//    jeepBtn.setBounds(10, 230, 220, 210);
     jeepBtn.setBackground(Color.WHITE);
     jeepBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     jeepBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -383,10 +374,8 @@ public class RentalExpress {
     carPanel.add(jeepBtn);
     
     ImageIcon f150 = new javax.swing.ImageIcon(getClass().getResource("f150.jpg"));
-//    ImageIcon f150 = new ImageIcon("images/f150.jpg");
     JToggleButton f150Btn = new JToggleButton("<html><center>2020 Ford F-150<br> $92/day </center></html>", f150);
     f150Btn.setRolloverEnabled(true);
-//    f150Btn.setBounds(240, 230, 220, 210);
     f150Btn.setBackground(Color.WHITE);
     f150Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
     f150Btn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -394,10 +383,8 @@ public class RentalExpress {
     carPanel.add(f150Btn);
     
     ImageIcon crv = new javax.swing.ImageIcon(getClass().getResource("crv.jpg"));
-//    ImageIcon crv = new ImageIcon("images/crv.jpg");
     JToggleButton crvBtn = new JToggleButton("<html><center>2020 Honda CRV<br> $73/day </center></html>", crv);
     crvBtn.setRolloverEnabled(true);
-//    crvBtn.setBounds(470, 230, 220, 210);
     crvBtn.setBackground(Color.WHITE);
     crvBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     crvBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -405,10 +392,8 @@ public class RentalExpress {
     carPanel.add(crvBtn);
     
     ImageIcon typeR = new javax.swing.ImageIcon(getClass().getResource("typer.jpg"));
-//    ImageIcon typeR = new ImageIcon("images/typer.jpg");
     JToggleButton typeRBtn = new JToggleButton("<html><center>2020 Honda Civic Type R<br> $104/day </center></html>", typeR);
     typeRBtn.setRolloverEnabled(true);
-//    typeRBtn.setBounds(10, 460, 220, 210);
     typeRBtn.setBackground(Color.WHITE);
     typeRBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     typeRBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -416,10 +401,8 @@ public class RentalExpress {
     carPanel.add(typeRBtn);
     
     ImageIcon camry = new javax.swing.ImageIcon(getClass().getResource("camry.jpg"));
-//    ImageIcon camry = new ImageIcon("images/camry.jpg");
     JToggleButton camryBtn = new JToggleButton("<html><center>2020 Toyota Camry<br> $72/day </center></html>", camry);
     camryBtn.setRolloverEnabled(true);
-//    camryBtn.setBounds(10, 460, 220, 210);
     camryBtn.setBackground(Color.WHITE);
     camryBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     camryBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -427,10 +410,8 @@ public class RentalExpress {
     carPanel.add(camryBtn);
     
     ImageIcon corolla = new javax.swing.ImageIcon(getClass().getResource("corolla.jpg"));
-//    ImageIcon corolla = new ImageIcon("images/corolla.jpg");
     JToggleButton corollaBtn = new JToggleButton("<html><center>2020 Toyota Corolla<br> $57/day </center></html>", corolla);
     corollaBtn.setRolloverEnabled(true);
-//    corollaBtn.setBounds(10, 460, 220, 210);
     corollaBtn.setBackground(Color.WHITE);
     corollaBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     corollaBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -438,10 +419,8 @@ public class RentalExpress {
     carPanel.add(corollaBtn);
     
     ImageIcon elantra = new javax.swing.ImageIcon(getClass().getResource("elantra.jpg"));
-//    ImageIcon elantra = new ImageIcon("images/elantra.jpg");
     JToggleButton elantraBtn = new JToggleButton("<html><center>2020 Hyundai Elantra <br> $52/day </center></html>", elantra);
     elantraBtn.setRolloverEnabled(true);
-//    elantraBtn.setBounds(10, 460, 220, 210);
     elantraBtn.setBackground(Color.WHITE);
     elantraBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     elantraBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -449,10 +428,8 @@ public class RentalExpress {
     carPanel.add(elantraBtn);
     
     ImageIcon explorer = new javax.swing.ImageIcon(getClass().getResource("explorer.jpg"));
-//    ImageIcon explorer = new ImageIcon("images/explorer.jpg");
     JToggleButton explorerBtn = new JToggleButton("<html><center>2020 Ford Explorer <br> $85/day </center></html>", explorer);
     explorerBtn.setRolloverEnabled(true);
-//    explorerBtn.setBounds(10, 460, 220, 210);
     explorerBtn.setBackground(Color.WHITE);
     explorerBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     explorerBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -460,10 +437,8 @@ public class RentalExpress {
     carPanel.add(explorerBtn);
     
     ImageIcon mazda3 = new javax.swing.ImageIcon(getClass().getResource("mazda3.jpg"));
-//    ImageIcon mazda3 = new ImageIcon("images/mazda3.jpg");
     JToggleButton mazda3Btn = new JToggleButton("<html><center>2020 Mazda 3 Sedan <br> $51/day </center></html>", mazda3);
     mazda3Btn.setRolloverEnabled(true);
-//    mazda3Btn.setBounds(10, 460, 220, 210);
     mazda3Btn.setBackground(Color.WHITE);
     mazda3Btn.setVerticalTextPosition(SwingConstants.BOTTOM);
     mazda3Btn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -471,10 +446,8 @@ public class RentalExpress {
     carPanel.add(mazda3Btn);
     
     ImageIcon highlander = new javax.swing.ImageIcon(getClass().getResource("highlander.jpg"));
-//    ImageIcon highlander = new ImageIcon("images/highlander.jpg");
     JToggleButton highlanderBtn = new JToggleButton("<html><center>2020 Toyota Highaldner <br> $82/day </center></html>", highlander);
     highlanderBtn.setRolloverEnabled(true);
-//    highlanderBtn.setBounds(10, 460, 220, 210);
     highlanderBtn.setBackground(Color.WHITE);
     highlanderBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     highlanderBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -482,10 +455,8 @@ public class RentalExpress {
     carPanel.add(highlanderBtn);
     
     ImageIcon supra = new javax.swing.ImageIcon(getClass().getResource("supra.jpg"));
-//    ImageIcon supra = new ImageIcon("images/supra.jpg");
     JToggleButton supraBtn = new JToggleButton("<html><center>2020 Toyota Supra <br> $74/day </center></html>", supra);
     supraBtn.setRolloverEnabled(true);
-//    supraBtn.setBounds(10, 460, 220, 210);
     supraBtn.setBackground(Color.WHITE);
     supraBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     supraBtn.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -493,19 +464,13 @@ public class RentalExpress {
     carPanel.add(supraBtn);
     
     ImageIcon wrx = new javax.swing.ImageIcon(getClass().getResource("wrx.jpg"));
-//    ImageIcon wrx = new ImageIcon("images/wrx.jpg");
     JToggleButton wrxBtn = new JToggleButton("<html><center>2020 Subaru WRX <br> $97/day </center></html>", wrx);
     wrxBtn.setRolloverEnabled(true);
-//    wrxBtn.setBounds(10, 460, 220, 210);
     wrxBtn.setBackground(Color.WHITE);
     wrxBtn.setVerticalTextPosition(SwingConstants.BOTTOM);
     wrxBtn.setHorizontalTextPosition(SwingConstants.CENTER);
     wrxBtn.setFocusPainted(false);
-    carPanel.add(wrxBtn);
-    
-    
-    
-    
+    carPanel.add(wrxBtn);    
     
     ButtonGroup carGroup = new ButtonGroup();
     carGroup.add(hellcatBtn);
@@ -526,7 +491,7 @@ public class RentalExpress {
 
     // ------------------------------------- Checkout Panel
     
-    JTextArea jt = new JTextArea("Test area");
+    JTextArea jt = new JTextArea("");
     
     finalPanel.setBackground(Color.white);
     finalPanel.add(jt);
@@ -540,13 +505,15 @@ public class RentalExpress {
         
         totalPrice = 0;
         
+        // Check if customer has selected a car
         if (carSelected) {
+          // Check if customer has logged in
           if (hasLoggedIn) {
-
-            //checkCustomer();
-
+            
+            // Calculate rental days
             numRentalDays = getRentalDays();
             
+            // Get pickup and dropoff values from JComboBoxes
             pickupLoc = (String) pickUpJCB.getSelectedItem();
             pickupDay = (Integer) puDayJCB.getSelectedItem();
             pickupMonth = (String) puMonthJCB.getSelectedItem();
@@ -565,10 +532,13 @@ public class RentalExpress {
                 + "\n");
             jt.append("Number of Days: " + numRentalDays + "\n\n");
             
+            // Add surcharge if dropoff location is different than pickup
             if (pickupLoc != dropoffLoc) {
               jt.append("Surcharge for dropping vehicle off at a different location: $50\n");
               totalPrice += 50;
             }
+            
+            // Calculate total cost
             totalPrice += carPrice * numRentalDays;
             jt.append(whichCar + " for " + numRentalDays + " days: " + "$" + 
               totalPrice + "\n");
@@ -591,7 +561,7 @@ public class RentalExpress {
       }
     });
     
-    // ActionListeners for Cars
+    // ActionListeners for Cars that set variables for the car model and price
     
     hellcatBtn.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -713,7 +683,7 @@ public class RentalExpress {
       }
     });
     
-    // MouseListeners to clear text when JTextField is clicked
+    // MouseListeners to clear text when JTextFields are clicked
     
     fNameText.addMouseListener(new MouseAdapter() {
       @Override
@@ -771,8 +741,7 @@ public class RentalExpress {
       }
     });
     
-    
-    
+    // ActionListeners for Side Panel buttons that change JPanels on CardLayout
     accBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         card.show(cardPanel,  "p1");
@@ -809,6 +778,7 @@ public class RentalExpress {
       }
     });
     
+    // ActionListener for Log In button
     loginBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         
@@ -817,8 +787,10 @@ public class RentalExpress {
           boolean loginExist = false;
           
           String loginUser = loginUserText.getText();
+          @SuppressWarnings("deprecation")
           String loginPass = loginPassText.getText();
           
+          // Connect to AWS MySQL DB
           Connection myConn = DriverManager.getConnection(url, userdb, passdb);
           
           PreparedStatement st = myConn.prepareStatement("SELECT * FROM customers");
@@ -827,15 +799,18 @@ public class RentalExpress {
           
           while (rs.next()) {
             String userName = rs.getString("username");
+            // Check for existing username in DB
             if (loginUser.equalsIgnoreCase(userName)) {
               String password = rs.getString("password");
               loginExist = true;
+              // Verify password matches the entry in DB
               if (loginPass.equals(password)) {
                 
                 JOptionPane.showMessageDialog(null, "Login Successful!");
                 
                 st = myConn.prepareStatement("SELECT * FROM customers WHERE username = '" + userName + "'");
                 
+                // Set local variables based on DB values
                 fName = rs.getString("first_name");
                 lName = rs.getString("last_name");
                 email = rs.getString("email");
@@ -847,6 +822,7 @@ public class RentalExpress {
                 day = rs.getInt("birth_day");
                 year = rs.getInt("birth_year");
                 
+                // Set Customer variables
                 c.setFirstName(fName);
                 c.setLastName(lName);
                 c.setEmail(email);
@@ -877,9 +853,11 @@ public class RentalExpress {
       }
     });
     
+    // ActionListener for Registration Button
     regBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         
+        // Verify all fields are not blank or default
         if (checkCustomer()) {
         
         fName = fNameText.getText();
@@ -898,6 +876,7 @@ public class RentalExpress {
         boolean userExists = false;
         
         try {
+          // Connect to AWS MySQL DB
           Connection myConn = DriverManager.getConnection(url, userdb, passdb);
           Statement insertStmt = myConn.createStatement();
           
@@ -908,11 +887,14 @@ public class RentalExpress {
           
           while (rs.next()) {
             String userName = rs.getString("username");
+            // Check if username already exists
             if (loginUser.equalsIgnoreCase(userName)) {
               userExists = true;
               JOptionPane.showMessageDialog(null, "Username Already Exists");
             }
           }  
+          
+          // If username does not exist, insert customer data into DB
           if (!userExists) {
             String sql = "insert into customers "
                 + "(last_name, first_name, email, street, city, state, birth_month, birth_day, birth_year, username, password) "
@@ -939,6 +921,7 @@ public class RentalExpress {
     frame.setResizable(false);
   }
   
+  // Method for assisting in rounding up values to two decimal places
   public static double round(double value, int places) {
     if (places < 0) throw new IllegalArgumentException();
 
@@ -947,8 +930,10 @@ public class RentalExpress {
     return bd.doubleValue();
   }
   
+  // Method to calculate the number of rental days selected
   public Integer getRentalDays() {
     
+    // Verify Input is valid before calculating rental days
     if (checkRentalDays()) {
       
       int pickupNum = 0;
@@ -1042,41 +1027,40 @@ public class RentalExpress {
       int numMonths = dropoffNum - pickupNum;
       int numDays = 0;
       
-      
+      // Calculate rental days depending on number of months and year
       if (dropoffYear > pickupYear) {
         numMonths = dropoffNum + (11 - pickupNum);
         numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
-        System.out.println(numMonths);
         return numDays;
       }
+      
       if (dropoffNum - pickupNum == 0){
         numDays = dropoffDay - pickupDay;
+        // If same-day pickup and dropoff, calculate 1 day
+        if (numDays == 0) {
+          numDays =1;
+          return numDays;
+        }
         return numDays;
-//        numMonths = dropoffNum - pickupNum;
-//        if (numMonths > 0) {
-//          numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
-//          return numDays;
       }
+      
       if (numMonths == 1) {
         numDays = (30 - pickupDay) + dropoffDay;
         return numDays;
       }
+      
       else {
         numMonths = (dropoffNum - pickupNum) - 1;
         numDays = (30 - pickupDay) + dropoffDay + (numMonths * 30);
-        System.out.println(dropoffNum);
-        System.out.println(pickupNum);
-        System.out.println(numMonths);
         return numDays;
       }
-//        numDays = (30 - pickupDay) + dropoffDay;
-//        System.out.println(numMonths);
-//        return numDays;
+      
     } else {
       return 0;
     }
   }
   
+  // Method to check for invalid input on pickup and dropoff dates
   public boolean checkRentalDays() {
     
     int pickupNum = 0;
@@ -1089,6 +1073,7 @@ public class RentalExpress {
     dropoffMonth = (String) doMonthJCB.getSelectedItem();
     dropoffYear = (Integer) doYearJCB.getSelectedItem();
     
+    // Check for invalid input such as dropoff dates that are before pickup
     if (dropoffYear < pickupYear) {
       card.show(cardPanel,  "p2");
       JOptionPane.showMessageDialog(null, "Please enter a valid pick-up and drop-off date");
@@ -1187,91 +1172,67 @@ public class RentalExpress {
       }
     }
     
-    
+    // If no invalid input detected, return true
     return true;
   }
   
+  // Method to verify input on registration panel
   public boolean checkCustomer() {
-    if (fNameText.getText().equals(" First Name ") || fNameText.getText().equals("")) {
+    
+    // Verify fields are not blank
+    if (fNameText.getText().equals("")) {
       card.show(cardPanel,  "p5");
       fNameText.setText("**Required**");
       fNameText.setForeground(Color.RED);
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
-    else if (lNameText.getText().equals(" Last Name ") || lNameText.getText().equals("")) {
+    else if (lNameText.getText().equals("")) {
       card.show(cardPanel,  "p5");
       lNameText.setText("**Required**");
       lNameText.setForeground(Color.RED);
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
-    else if (addrText1.getText().equals(" House/Apt # & Street ") || addrText1.getText().equals("")) {
+    else if (addrText1.getText().equals("")) {
       card.show(cardPanel,  "p5");
       addrText1.setText("**Required**");
       addrText1.setForeground(Color.RED);
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
-//    else if (addrText2.getText().equals(" City, State, Zip ") || addrText2.getText().equals("")) {
-//      card.show(cardPanel,  "p5");
-//      addrText2.setText("**Required**");
-//      addrText2.setForeground(Color.RED);
-//      JOptionPane.showMessageDialog(null, "Please complete all fields");
-//      return false;
-//    }
-    else if (emailText.getText().equals(" Email Address ") || emailText.getText().equals("")) {
+
+    else if (emailText.getText().equals("")) {
       card.show(cardPanel,  "p5");
       emailText.setText("**Required**");
       emailText.setForeground(Color.RED);
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
-    else if (userText.getText().equals(" Username ") || userText.getText().equals("")) {
+    else if (userText.getText().equals("")) {
       card.show(cardPanel,  "p5");
       userText.setText("**Required**");
       userText.setForeground(Color.RED);
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
-    else if (passText.getText().equals(" Password ") || passText.getText().equals("")) {
+    else if (passText.getText().equals("")) {
       card.show(cardPanel,  "p5");
       passText.setText("**Required**");
       passText.setForeground(Color.RED);
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
+    
+    // If input is valid, return true and set acctMade to true
     else {
       acctMade = true;
       return true;
     }
-  }
-  
-  
+  } 
   
   public static void main(String[] args) {
     new RentalExpress();
 
   }
-
-
-
-
-
-//  @Override
-//  public void actionPerformed(ActionEvent event) {
-//    
-//    if (event.getSource().equals(accBtn)) {
-//      
-//      card.show(cardPanel, "p1");
-//    }
-//    
-//    if (event.getSource().equals(pickupBtn)) {
-//      
-//      card.show(cardPanel, "p2");
-//    }
-//    
-//    
-//  }
-
 }
