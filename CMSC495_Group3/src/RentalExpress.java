@@ -496,71 +496,6 @@ public class RentalExpress {
     finalPanel.setBackground(Color.white);
     finalPanel.add(jt);
     
-    
-    // ActionListener for Checkout Button
-    
-    finalBtn.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        jt.setText("");
-        
-        totalPrice = 0;
-        
-        // Check if customer has selected a car
-        if (carSelected) {
-          // Check if customer has logged in
-          if (hasLoggedIn) {
-            
-            // Calculate rental days
-            numRentalDays = getRentalDays();
-            
-            // Get pickup and dropoff values from JComboBoxes
-            pickupLoc = (String) pickUpJCB.getSelectedItem();
-            pickupDay = (Integer) puDayJCB.getSelectedItem();
-            pickupMonth = (String) puMonthJCB.getSelectedItem();
-            pickupYear = (Integer) puYearJCB.getSelectedItem();
-            dropoffLoc = (String) dropOffJCB.getSelectedItem();
-            dropoffDay = (Integer) doDayJCB.getSelectedItem();
-            dropoffMonth = (String) doMonthJCB.getSelectedItem();
-            dropoffYear = (Integer) doYearJCB.getSelectedItem();
-
-            jt.append("Customer Name: " + c.getFirstName() + " " + c.getLastName() + "\n");
-            jt.append("Contact Info: " + c.getEmail() + "\n\n");
-            jt.append("Rental Car: " + whichCar + "\n");
-            jt.append("Price per day: $" + carPrice + "\n");
-            jt.append("Pickup Location: " + pickupLoc + " on " + pickupMonth + " " + pickupDay + ", " + pickupYear + "\n");
-            jt.append("Dropoff Location: " + dropoffLoc + " on " + dropoffMonth + " " + dropoffDay + ", " + dropoffYear
-                + "\n");
-            jt.append("Number of Days: " + numRentalDays + "\n\n");
-            
-            // Add surcharge if dropoff location is different than pickup
-            if (pickupLoc != dropoffLoc) {
-              jt.append("Surcharge for dropping vehicle off at a different location: $50\n");
-              totalPrice += 50;
-            }
-            
-            // Calculate total cost
-            totalPrice += carPrice * numRentalDays;
-            jt.append(whichCar + " for " + numRentalDays + " days: " + "$" + 
-              totalPrice + "\n");
-            //double salesTax = Math.round(((totalPrice * .053) * 100.0)/ 100.0);
-            double salesTaxRaw = totalPrice * .053;
-            double salesTax = round(salesTaxRaw, 2);
-            //BigDecimal salesTax = BigDecimal.valueOf(salesTaxRaw);
-            //salesTax = salesTax.setScale(2, RoundingMode.HALF_UP);
-            jt.append("VA Sales Tax: $" + salesTax + "\n");
-            jt.append("Total: $" + (salesTax + totalPrice));
-            
-          } else {
-            card.show(cardPanel,  "p1");
-            JOptionPane.showMessageDialog(null, "Please log in before checking out");
-          }
-        } else {
-          card.show(cardPanel,  "p3");
-          JOptionPane.showMessageDialog(null, "Please select a car");
-        }
-      }
-    });
-    
     // ActionListeners for Cars that set variables for the car model and price
     
     hellcatBtn.addActionListener(new ActionListener() {
@@ -775,6 +710,73 @@ public class RentalExpress {
     loginPageBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         card.show(cardPanel,  "p1");
+      }
+    });
+    
+// ActionListener for Checkout Button
+    
+    finalBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        jt.setText("");
+        
+        totalPrice = 0;
+        
+        // Check if customer has selected a car
+        if (carSelected) {
+          // Check if customer has logged in
+          if (hasLoggedIn) {
+            
+            // Calculate rental days
+            numRentalDays = getRentalDays();
+            
+            int surcharge = 0;
+            
+            // Get pickup and dropoff values from JComboBoxes
+            pickupLoc = (String) pickUpJCB.getSelectedItem();
+            pickupDay = (Integer) puDayJCB.getSelectedItem();
+            pickupMonth = (String) puMonthJCB.getSelectedItem();
+            pickupYear = (Integer) puYearJCB.getSelectedItem();
+            dropoffLoc = (String) dropOffJCB.getSelectedItem();
+            dropoffDay = (Integer) doDayJCB.getSelectedItem();
+            dropoffMonth = (String) doMonthJCB.getSelectedItem();
+            dropoffYear = (Integer) doYearJCB.getSelectedItem();
+
+            jt.append("Customer Name: " + c.getFirstName() + " " + c.getLastName() + "\n");
+            jt.append("Contact Info: " + c.getEmail() + "\n\n");
+            jt.append("Rental Car: " + whichCar + "\n");
+            jt.append("Price per day: $" + carPrice + "\n");
+            jt.append("Pickup Location: " + pickupLoc + " on " + pickupMonth + " " + pickupDay + ", " + pickupYear + "\n");
+            jt.append("Dropoff Location: " + dropoffLoc + " on " + dropoffMonth + " " + dropoffDay + ", " + dropoffYear
+                + "\n");
+            jt.append("Number of Days: " + numRentalDays + "\n\n");
+            
+            // Add surcharge if dropoff location is different than pickup
+            if (pickupLoc != dropoffLoc) {
+              jt.append("Surcharge for dropping vehicle off at a different location: $50\n");
+              surcharge = 50;
+            }
+            
+            // Calculate total cost
+            totalPrice += carPrice * numRentalDays;
+            jt.append(whichCar + " for " + numRentalDays + " days: " + "$" + 
+              (totalPrice - 50) + "\n");
+            totalPrice += surcharge;
+            //double salesTax = Math.round(((totalPrice * .053) * 100.0)/ 100.0);
+            double salesTaxRaw = totalPrice * .053;
+            double salesTax = round(salesTaxRaw, 2);
+            //BigDecimal salesTax = BigDecimal.valueOf(salesTaxRaw);
+            //salesTax = salesTax.setScale(2, RoundingMode.HALF_UP);
+            jt.append("VA Sales Tax: $" + salesTax + "\n");
+            jt.append("Total: $" + (salesTax + totalPrice));
+            
+          } else {
+            card.show(cardPanel,  "p1");
+            JOptionPane.showMessageDialog(null, "Please log in before checking out");
+          }
+        } else {
+          card.show(cardPanel,  "p3");
+          JOptionPane.showMessageDialog(null, "Please select a car");
+        }
       }
     });
     
