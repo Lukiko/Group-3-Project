@@ -7,8 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -60,17 +59,21 @@ public class RentalExpress {
   JPanel pickupPanel = new JPanel();
   JPanel carPanel = new JPanel();
   JPanel finalPanel = new JPanel();
+  JPanel editPanel = new JPanel();
   
   JScrollPane carJSPanel = new JScrollPane(carPanel);
   
   // Account panel items
-  JButton accBtn = new JButton("<html><center>"+"Log In"+"</html></center>");
+  JButton accBtn = new JButton("<html><center>"+"Home"+"</html></center>");
   JButton pickupBtn = new JButton("<html><center>"+"Pick-Up Location and Date"+"</html></center>");
   JButton carBtn = new JButton("Select Car");
   JButton finalBtn = new JButton("Checkout");
   
   JButton regBtn = new JButton("Create Account");
-  JButton loginPageBtn = new JButton("Log In");
+  JButton editPageBtn = new JButton("Edit My Profile");
+  JButton editBtn = new JButton("Save Changes");
+  JButton loginPageBtn = new JButton("Home");
+  JButton loginPageBtn2 = new JButton("Home");
   JButton loginBtn = new JButton("Log In");
   JButton regPageBtn = new JButton("Sign Up");
   
@@ -122,6 +125,56 @@ public class RentalExpress {
   JTextField cityText = new JTextField("");
   JTextField loginUserText = new JTextField("");
   JPasswordField loginPassText = new JPasswordField("");
+  
+  // Items for Profile Editing
+  
+  JLabel fNameLabelEdit = new JLabel("First name ", SwingConstants.LEFT);
+  JLabel lNameLabelEdit = new JLabel("Last name ", SwingConstants.LEFT);
+  JLabel addressLabelEdit = new JLabel("Address ", SwingConstants.LEFT);
+  JLabel emailLabelEdit = new JLabel("Email address ", SwingConstants.LEFT);
+  JLabel userLabelEdit = new JLabel("Username ", SwingConstants.LEFT);
+  JLabel passLabelEdit = new JLabel("Password ", SwingConstants.LEFT);
+  JLabel creditLabelEdit = new JLabel("Credit Card # (No Spaces): ", SwingConstants.LEFT);
+  JLabel bdayLabelEdit = new JLabel("Birthday ", SwingConstants.LEFT);
+  JLabel cityLabelEdit = new JLabel("City", SwingConstants.LEFT);
+  JLabel stateLabelEdit = new JLabel("State", SwingConstants.LEFT);
+  JLabel loginUserLabelEdit = new JLabel("Username", SwingConstants.LEFT);
+  JLabel loginPassLabelEdit = new JLabel("Password", SwingConstants.LEFT);
+  
+  String[] bMJCBEdit = {"January", "February", "March", "April", "May", "June", "July", "August", 
+      "September", "October", "November", "December"};
+  JComboBox birthMonthJCBEdit = new JComboBox(bMJCB);
+  Integer[] bDJCBEdit = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+  JComboBox birthDayJCBEdit = new JComboBox(bDJCB);
+  Integer[] bYJCBEdit = {2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006,
+      2005, 2004, 2003, 2002, 2001, 2000, 1999, 1998, 1997, 1996, 1995, 1994, 1993, 1992, 1991,
+      1990, 1989, 1988, 1987, 1986, 1985, 1984, 1983, 1982, 1981, 1980, 1979, 1978, 1977, 1976,
+      1975, 1974, 1973, 1972, 1971, 1970, 1969, 1968, 1967, 1966, 1965, 1964, 1963, 1962, 1961,
+      1960, 1959, 1958, 1957, 1956, 1955, 1954, 1953, 1952, 1951, 1950, 1949, 1948, 1947, 1946,
+      1945, 1944, 1943, 1942, 1941, 1940, 1939, 1938, 1937, 1936, 1935, 1934, 1933, 1932, 1931,
+      1930, 1929, 1928, 1927, 1926, 1925, 1924, 1923, 1922, 1921, 1920, 1919, 1918, 1917, 1916,
+      1915, 1914, 1913, 1912, 1911, 1910, 1909, 1908, 1907, 1906, 1905, 1904, 1903, 1902, 1901,
+      1900};
+  JComboBox birthYearJCBEdit = new JComboBox(bYJCB);
+  String[] stJCBEdit = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", 
+      "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", 
+      "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", 
+      "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", 
+      "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", 
+      "West Virginia", "Wisconsin", "Wyoming"};
+  JComboBox stateJCBEdit = new JComboBox(stJCB);
+  
+  JTextField fNameTextEdit = new JTextField("");
+  JTextField lNameTextEdit = new JTextField("");
+  JTextField addrText1Edit = new JTextField("");
+  JTextField addrText2Edit = new JTextField("");
+  JTextField emailTextEdit = new JTextField("");
+  JTextField userTextEdit = new JTextField("");
+  JPasswordField passTextEdit = new JPasswordField("");
+  JTextField cityTextEdit = new JTextField("");
+  JTextField loginUserTextEdit = new JTextField("");
+  JPasswordField loginPassTextEdit = new JPasswordField("");
   
   // Items for Pickup and Dropoff Panel
   JLabel pickUpLocLabel = new JLabel("Pick-Up Location: ", SwingConstants.CENTER);
@@ -188,6 +241,7 @@ public class RentalExpress {
     cardPanel.add(carJSPanel, "p3");
     cardPanel.add(finalPanel, "p4");
     cardPanel.add(acctPanel, "p5");
+    cardPanel.add(editPanel, "p6");
     
     // --------------------------- Login and Sign Up Panel
     
@@ -206,11 +260,14 @@ public class RentalExpress {
     loginPassText.setEchoChar('*');
     loginPanel.add(loginPassText);
     
-    loginBtn.setBounds(250, 300, 180, 45);
+    regPageBtn.setBounds(250, 300, 180, 45);
+    loginPanel.add(regPageBtn);
+    
+    loginBtn.setBounds(250, 370, 180, 45);
     loginPanel.add(loginBtn);
     
-    regPageBtn.setBounds(250, 370, 180, 45);
-    loginPanel.add(regPageBtn);
+    editPageBtn.setBounds(250, 440, 180, 45);
+    loginPanel.add(editPageBtn);
     
     // --------------------------- Registration Panel
     
@@ -284,9 +341,86 @@ public class RentalExpress {
     regBtn.setBounds(180, 480, 140, 65);
     acctPanel.add(regBtn);
     
+    loginPageBtn2.setFocusPainted(false);
+    loginPageBtn2.setBounds(360, 480, 140, 65);
+    acctPanel.add(loginPageBtn2);
+    
+    //---------------------------- Edit Profile Panel
+    
+    editPanel.setLayout(null);
+    
+    fNameLabelEdit.setBounds(130, 30, 80, 50);
+    fNameLabelEdit.setHorizontalAlignment(JLabel.LEFT);
+    editPanel.add(fNameLabelEdit);
+    
+    fNameTextEdit.setBounds(130, 70, 190, 30);
+    editPanel.add(fNameTextEdit);
+    
+    lNameLabelEdit.setBounds(360, 30, 80, 50);
+    lNameLabelEdit.setHorizontalAlignment(JLabel.LEFT);
+    editPanel.add(lNameLabelEdit);
+    
+    lNameTextEdit.setBounds(360, 70, 190, 30);
+    editPanel.add(lNameTextEdit);
+    
+    addressLabelEdit.setBounds(130, 100, 80, 50);
+    addressLabelEdit.setHorizontalAlignment(JLabel.LEFT);
+    editPanel.add(addressLabelEdit);
+    
+    addrText1Edit.setBounds(130, 140, 420, 30);
+    editPanel.add(addrText1Edit);
+    
+    cityLabelEdit.setBounds(130, 170, 80, 50);
+    editPanel.add(cityLabelEdit);
+    
+    cityTextEdit.setBounds(130, 210, 190, 30);
+    editPanel.add(cityTextEdit);
+    
+    stateLabelEdit.setBounds(360, 170, 80, 50);
+    editPanel.add(stateLabelEdit);
+    
+    stateJCBEdit.setBounds(360, 210, 190, 30);
+    editPanel.add(stateJCBEdit);
+    
+    bdayLabelEdit.setBounds(130, 240, 80, 50);
+    editPanel.add(bdayLabelEdit);
+    
+    birthMonthJCBEdit.setBounds(130, 280, 150, 30);
+    editPanel.add(birthMonthJCBEdit);
+    
+    birthDayJCBEdit.setBounds(300, 280, 60, 30);
+    editPanel.add(birthDayJCBEdit);
+    
+    birthYearJCBEdit.setBounds(380, 280, 85, 30);
+    editPanel.add(birthYearJCBEdit);
+    
+    emailLabelEdit.setBounds(130, 310, 120, 50);
+    editPanel.add(emailLabelEdit);
+    
+    emailTextEdit.setBounds(130, 350, 420, 30);
+    editPanel.add(emailTextEdit);
+    
+    userLabelEdit.setBounds(130, 380, 80, 50);
+    editPanel.add(userLabelEdit);
+    
+    userTextEdit.setBounds(130, 420, 190, 30);
+    userTextEdit.setEditable(false);
+    editPanel.add(userTextEdit);
+    
+    passLabelEdit.setBounds(360, 380, 80, 50);
+    editPanel.add(passLabelEdit);
+    
+    passTextEdit.setBounds(360, 420, 190, 30);
+    passTextEdit.setEchoChar('*');
+    editPanel.add(passTextEdit);
+    
+    editBtn.setFocusPainted(false);
+    editBtn.setBounds(180, 480, 140, 65);
+    editPanel.add(editBtn);
+    
     loginPageBtn.setFocusPainted(false);
     loginPageBtn.setBounds(360, 480, 140, 65);
-    acctPanel.add(loginPageBtn);
+    editPanel.add(loginPageBtn);
     
     //---------------------------- Pick Up and Drop Off Panel
     
@@ -713,7 +847,93 @@ public class RentalExpress {
       }
     });
     
-// ActionListener for Checkout Button
+    loginPageBtn2.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent arg0) {
+        card.show(cardPanel,  "p1");
+      }
+    });
+    
+    editPageBtn.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent arg0) {
+        if (!hasLoggedIn) {
+          JOptionPane.showMessageDialog(null, "Please log in to edit your profile");
+        }
+        else {
+          
+          fNameTextEdit.setText(c.getFirstName());
+          lNameTextEdit.setText(c.getLastName());
+          addrText1Edit.setText(c.getAddress1());
+          cityTextEdit.setText(c.getCity());
+          stateJCBEdit.setSelectedItem(c.getState());
+          birthMonthJCBEdit.setSelectedItem(c.getMonth());
+          birthDayJCBEdit.setSelectedItem(c.getDay());
+          birthYearJCBEdit.setSelectedItem(c.getYear());
+          emailTextEdit.setText(c.getEmail());
+          userTextEdit.setText(c.getUsername());         
+          
+          card.show(cardPanel,  "p6");
+        }
+      }
+    });
+    
+    editBtn.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        
+        String userName = c.getUsername();
+        
+        state = (String) stateJCBEdit.getSelectedItem();
+        month = (String) birthMonthJCBEdit.getSelectedItem();
+        day = (Integer) birthDayJCBEdit.getSelectedItem();
+        year = (Integer) birthYearJCBEdit.getSelectedItem();
+        
+        c.setFirstName(fNameTextEdit.getText());
+        c.setLastName(lNameTextEdit.getText());
+        c.setAddress1(addrText1Edit.getText());
+        c.setCity(cityTextEdit.getText());
+        c.setState(state);
+        c.setMonth(month);
+        c.setDay(day);
+        c.setYear(year);
+        c.setEmail(emailTextEdit.getText());
+        c.setUsername(userTextEdit.getText());
+        c.setPassword(passTextEdit.getText());
+        
+        if (checkEdits()) {
+          
+          try {
+            Connection myConn = DriverManager.getConnection(url, userdb, passdb);
+            Statement updateStmt = myConn.createStatement();
+            
+            PreparedStatement st = myConn.prepareStatement("SELECT * FROM customers");
+            ResultSet rs = st.executeQuery();
+            
+            String sql = "update customers set "
+                + "last_name = '" + lNameTextEdit.getText() + "', "
+                + "first_name = '" + fNameTextEdit.getText() + "', "
+                + "street = '" + addrText1Edit.getText() + "', "
+                + "city = '" + cityTextEdit.getText() + "', "
+                + "state = '" + state + "', "
+                + "email = '" + emailTextEdit.getText() + "', "
+                + "birth_month = '" + month + "', "
+                + "birth_day = '" + day + "', "
+                + "birth_year = '" + year + "', "
+                + "password = '" + passTextEdit.getText() + "' "
+                + "WHERE username = '" + userName + "'";
+            
+            updateStmt.executeUpdate(sql);
+            
+            JOptionPane.showMessageDialog(null, "<html><center>Changes Saved</html></center>");
+            
+          } catch (SQLException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+          }
+        }
+      }
+    });
+    
+    
+    // ActionListener for Checkout Button
     
     finalBtn.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -830,6 +1050,8 @@ public class RentalExpress {
                 c.setEmail(email);
                 c.setUsername(user);
                 c.setAddress1(addr1);
+                c.setCity(city);
+                c.setState(state);
                 c.setMonth(month);
                 c.setDay(day);
                 c.setYear(year);
@@ -862,58 +1084,58 @@ public class RentalExpress {
         // Verify all fields are not blank or default
         if (checkCustomer()) {
         
-        fName = fNameText.getText();
-        lName = lNameText.getText();
-        addr1 = addrText1.getText();
-        addr2 = addrText2.getText();
-        email = emailText.getText();
-        user = userText.getText();
-        pass = passText.getText();
-        city = cityText.getText();
-        state = (String) stateJCB.getSelectedItem();
-        month = (String) birthMonthJCB.getSelectedItem();
-        day = (Integer) birthDayJCB.getSelectedItem();
-        year = (Integer) birthYearJCB.getSelectedItem();
-        
-        boolean userExists = false;
-        
-        try {
-          // Connect to AWS MySQL DB
-          Connection myConn = DriverManager.getConnection(url, userdb, passdb);
-          Statement insertStmt = myConn.createStatement();
+          fName = fNameText.getText();
+          lName = lNameText.getText();
+          addr1 = addrText1.getText();
+          addr2 = addrText2.getText();
+          email = emailText.getText();
+          user = userText.getText();
+          pass = passText.getText();
+          city = cityText.getText();
+          state = (String) stateJCB.getSelectedItem();
+          month = (String) birthMonthJCB.getSelectedItem();
+          day = (Integer) birthDayJCB.getSelectedItem();
+          year = (Integer) birthYearJCB.getSelectedItem();
           
-          PreparedStatement st = myConn.prepareStatement("SELECT * FROM customers");
-          ResultSet rs = st.executeQuery();
+          boolean userExists = false;
           
-          String loginUser = userText.getText();
-          
-          while (rs.next()) {
-            String userName = rs.getString("username");
-            // Check if username already exists
-            if (loginUser.equalsIgnoreCase(userName)) {
-              userExists = true;
-              JOptionPane.showMessageDialog(null, "Username Already Exists");
+          try {
+            // Connect to AWS MySQL DB
+            Connection myConn = DriverManager.getConnection(url, userdb, passdb);
+            Statement insertStmt = myConn.createStatement();
+            
+            PreparedStatement st = myConn.prepareStatement("SELECT * FROM customers");
+            ResultSet rs = st.executeQuery();
+            
+            String loginUser = userText.getText();
+            
+            while (rs.next()) {
+              String userName = rs.getString("username");
+              // Check if username already exists
+              if (loginUser.equalsIgnoreCase(userName)) {
+                userExists = true;
+                JOptionPane.showMessageDialog(null, "Username Already Exists");
+              }
+            }  
+            
+            // If username does not exist, insert customer data into DB
+            if (!userExists) {
+              String sql = "insert into customers "
+                  + "(last_name, first_name, email, street, city, state, birth_month, birth_day, birth_year, username, password) "
+                  + "values ('" + lName + "', '" + fName + "', '" + email + "', '" + addr1 + "', '" 
+                  + city + "', '" + state + "', '" + month + "', '" + day + "', '" + year + "', '" 
+                  + user + "', '" + pass + "')";
+              
+              insertStmt.executeUpdate(sql);
+              JOptionPane.showMessageDialog(null, "<html><center>Account Created Successfully!<br>"
+                  + "You May Now Log In</center></html>");
+              card.show(cardPanel, "p1");
             }
           }  
-          
-          // If username does not exist, insert customer data into DB
-          if (!userExists) {
-            String sql = "insert into customers "
-                + "(last_name, first_name, email, street, city, state, birth_month, birth_day, birth_year, username, password) "
-                + "values ('" + lName + "', '" + fName + "', '" + email + "', '" + addr1 + "', '" 
-                + city + "', '" + state + "', '" + month + "', '" + day + "', '" + year + "', '" 
-                + user + "', '" + pass + "')";
-            
-            insertStmt.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null, "<html><center>Account Created Successfully!<br>"
-                + "You May Now Log In</center></html>");
-            card.show(cardPanel, "p1");
+          catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Insert Failed");
           }
-        }  
-        catch (Exception e) {
-          e.printStackTrace();
-          JOptionPane.showMessageDialog(null, "Insert Failed");
-        }
         }  
       }
     });
@@ -1178,6 +1400,48 @@ public class RentalExpress {
     return true;
   }
   
+  public boolean checkEdits() {
+    if (fNameTextEdit.getText().equals("")) {
+      fNameTextEdit.setText("**Required**");
+      fNameTextEdit.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (lNameTextEdit.getText().equals("")) {
+      lNameTextEdit.setText("**Required**");
+      lNameTextEdit.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (addrText1Edit.getText().equals("")) {
+      addrText1Edit.setText("**Required**");
+      addrText1Edit.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (emailTextEdit.getText().equals("")) {
+      emailTextEdit.setText("**Required**");
+      emailTextEdit.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (cityTextEdit.getText().equals("")) {
+      cityTextEdit.setText("**Required**");
+      cityTextEdit.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else if (passTextEdit.getText().equals("")) {
+      passTextEdit.setText("**Required**");
+      passTextEdit.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+  
   // Method to verify input on registration panel
   public boolean checkCustomer() {
     
@@ -1203,7 +1467,13 @@ public class RentalExpress {
       JOptionPane.showMessageDialog(null, "Please complete all fields");
       return false;
     }
-
+    else if (cityText.getText().equals("")) {
+      card.show(cardPanel,  "p5");
+      cityText.setText("**Required**");
+      cityText.setForeground(Color.RED);
+      JOptionPane.showMessageDialog(null, "Please complete all fields");
+      return false;
+    }
     else if (emailText.getText().equals("")) {
       card.show(cardPanel,  "p5");
       emailText.setText("**Required**");
