@@ -31,7 +31,7 @@ import java.sql.*;
 public class RentalExpress {
   
   // Variables for registration panel
-  private String fName, lName, addr1, addr2, email, user, pass, month, city, state;
+  private String fName, lName, addr1, email, user, pass, month, city, state;
   private int day, year;
   
   // Variables for pickup and dropoff panel
@@ -829,12 +829,6 @@ public class RentalExpress {
       }
     });
     
-    finalBtn.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent arg0) {
-        card.show(cardPanel,  "p4");
-      }
-    });
-    
     regPageBtn.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent arg0) {
         card.show(cardPanel,  "p5");
@@ -989,13 +983,15 @@ public class RentalExpress {
             jt.append("VA Sales Tax: $" + salesTax + "\n");
             jt.append("Total: $" + (salesTax + totalPrice));
             
+            card.show(cardPanel,  "p4");
+            
           } else {
-            card.show(cardPanel,  "p1");
+            card.show(cardPanel, "p1");
             JOptionPane.showMessageDialog(null, "Please log in before checking out");
           }
         } else {
-          card.show(cardPanel,  "p3");
-          JOptionPane.showMessageDialog(null, "Please select a car");
+          card.show(cardPanel, "p3");
+          JOptionPane.showMessageDialog(null, "Please select a car");          
         }
       }
     });
@@ -1087,7 +1083,6 @@ public class RentalExpress {
           fName = fNameText.getText();
           lName = lNameText.getText();
           addr1 = addrText1.getText();
-          addr2 = addrText2.getText();
           email = emailText.getText();
           user = userText.getText();
           pass = passText.getText();
